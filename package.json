@@ -9,17 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/three": "^10.0.1",
+    "@react-three/drei": "^10.4.2",
+    "@react-three/fiber": "^9.1.4",
+    "@react-three/postprocessing": "^3.0.4",
+    "@react-three/rapier": "^2.1.0",
+    "gl-noise": "^1.6.1",
+    "leva": "^0.10.0",
+    "next": "15.1.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.1.6"
+    "react-use": "^17.6.0",
+    "three-custom-shader-material": "^6.3.7",
+    "three-stdlib": "^2.36.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.6",
-    "@eslint/eslintrc": "^3"
+    "typescript": "^5"
   }
 }

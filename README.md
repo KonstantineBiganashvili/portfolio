@@ -1,36 +1,71 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+> Note: This portfolio is a work in progress.
 
-## Getting Started
+### biganashvili.dev — 3D Portfolio
 
-First, run the development server:
+Personal portfolio showcasing interactive 3D scenes on the web: animated ocean, boats, dynamic sky (sun/moon), and starfields powered by WebGL and shaders. Built with Next.js and React Three Fiber.
+
+Visit: `https://biganashvili.dev`
+
+### Tech Stack
+
+- **Framework**: Next.js (App Router)
+- **UI**: React 19
+- **3D/Rendering**: three.js via `@react-three/fiber`, `@react-three/drei`, `@react-three/postprocessing`
+- **Physics**: `@react-three/rapier`
+- **Shaders/GLSL**: custom materials and utility libs (`gl-noise`, `three-stdlib`, `three-custom-shader-material`)
+- **Dev tooling**: TypeScript, ESLint
+
+### Getting Started
+
+Prerequisites: Node.js 18+ (or 20+ recommended) and npm.
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Build for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Start the production server:
 
-## Learn More
+```bash
+npm start
+```
 
-To learn more about Next.js, take a look at the following resources:
+### Project Structure
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `src/app` — Next.js app entry, routing, layout
+- `src/components/Landing/Scene/MainCanvas` — primary 3D scene (ocean, skybox, boats, stars)
+- `src/components/Landing/Scene/ThemeCanvas` — sun/moon theme elements
+- `src/shaders` — GLSL shader modules for ocean and stars
+- `public/static` — models (`.glb`), textures (e.g., ocean normals), and HDR skybox
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Scripts
 
-## Deploy on Vercel
+- `dev`: start dev server (Turbopack)
+- `build`: production build
+- `start`: run production server
+- `lint`: run ESLint
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Credits
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Sun by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/77wHkzwlpOq)
+- Moon by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/63c8LKpoXTO)
+- Ship by Kenney (https://poly.pizza/m/SPxFN3Oazd)
+- Boat by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/1ZuSXvhkRg_)
+- Boat by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/84-DYhLzxNq)
+- Boat by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/c2SYxaiPfF3)
+- Cruiseship by Poly by Google [CC-BY] (https://creativecommons.org/licenses/by/3.0/) via Poly Pizza (https://poly.pizza/m/7j5X_ALVzlk)
+
+3D assets are used under their respective licenses. Please refer to the original sources above.

@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import { Vector3, Vector2 } from 'three';
 import Boat from './Boat';
 import { BoatProps, BoatSystemConfig } from '@/types/boats';
 import {
-	DEFAULT_BOAT_CONFIG,
-	createRandomBoat,
-	checkPotentialCollision,
-	generateRandomDirection,
-	generateRandomSpeed,
+    DEFAULT_BOAT_CONFIG,
+    createRandomBoat,
+    BOAT_FORWARD_SIGNS,
+    getCameraBasisXZ,
+    generatePositionInFront,
+    generateSideSpawn,
+    computeEffectiveSpeed,
 } from '@/utils/boats';
 
 interface BoatSystemProps {
@@ -16,161 +18,122 @@ interface BoatSystemProps {
 }
 
 const FOV_CONFIG = {
-	cameraPosition: new Vector3(0, 10, 10),
-	viewRadius: 50,
-	minDistance: 8,
-	maxDistance: 35,
-	spawnDistance: 25,
+    minDistance: 8,
+    maxDistance: 150,
+    spawnDistance: 25,
 };
 
 const BoatSystem: React.FC<BoatSystemProps> = ({ config = {} }) => {
 	const [boats, setBoats] = useState<BoatProps[]>([]);
-	const [lastUpdate, setLastUpdate] = useState(0);
 
-	const boatConfig: BoatSystemConfig = { ...DEFAULT_BOAT_CONFIG, ...config };
+    const boatConfig: BoatSystemConfig = { ...DEFAULT_BOAT_CONFIG, ...config };
 
-	const generatePositionInFOV = (): Vector3 => {
-		const angle = Math.random() * Math.PI * 2;
-		const distance = FOV_CONFIG.spawnDistance;
-		const x = Math.cos(angle) * distance;
-		const z = Math.sin(angle) * distance;
-		return new Vector3(x, 0, z);
-	};
+    const { camera } = useThree();
 
-	const isInFieldOfView = (position: Vector3): boolean => {
-		const distance = position.distanceTo(FOV_CONFIG.cameraPosition);
-		return (
-			distance >= FOV_CONFIG.minDistance && distance <= FOV_CONFIG.maxDistance
-		);
-	};
+    const generatePositionInFOV = (distanceAhead?: number): Vector3 =>
+        generatePositionInFront(camera, distanceAhead ?? FOV_CONFIG.spawnDistance, 0.8);
+
+    const computeSpawnPositions = (count: number): Vector3[] => {
+        const minSeparation = 18;
+        const maxDistance = FOV_CONFIG.maxDistance;
+        const step = Math.max(minSeparation, Math.min(FOV_CONFIG.spawnDistance, maxDistance / count));
+
+        const positions: Vector3[] = [];
+        for (let i = 1; i <= count; i++) {
+            const pos = generatePositionInFOV(step * i);
+            positions.push(pos);
+        }
+        return positions;
+    };
+
+    const generatePositionOnSide = (side: 'left' | 'right') =>
+        generateSideSpawn(camera, side, Math.max(FOV_CONFIG.minDistance + 4, FOV_CONFIG.spawnDistance * 0.8), Math.min(FOV_CONFIG.maxDistance * 0.9, FOV_CONFIG.maxDistance));
 
 	useEffect(() => {
-		const initialBoats: BoatProps[] = [];
-		for (let i = 0; i < boatConfig.maxBoats; i++) {
-			const boat = createRandomBoat(`boat-${i}`, boatConfig);
-			boat.position = generatePositionInFOV();
-			boat.direction = generateRandomDirection();
-			boat.rotation = Math.atan2(boat.direction.y, boat.direction.x);
-			boat.speed = generateRandomSpeed(boatConfig);
-			boat.isMoving = true;
+        const totalBoats = 5;
+        const positions = computeSpawnPositions(totalBoats);
 
-			initialBoats.push(boat);
-		}
-		setBoats(initialBoats);
-	}, [boatConfig.maxBoats]);
+        const forward = new Vector3();
+        camera.getWorldDirection(forward);
+        const forward2 = new Vector2(forward.x, forward.z).normalize();
+        const right2 = new Vector2(-forward2.y, forward2.x); 
+        const yawRight = Math.atan2(right2.y, right2.x);
+        const yawLeft = Math.atan2(-right2.y, -right2.x);
 
-	useFrame((state, deltaTime) => {
-		if (boats.length === 0) return;
+        const spawned: BoatProps[] = positions.map((pos, idx) => {
+            const boat = createRandomBoat(`boat-${idx}`, boatConfig);
+            boat.position = pos;
+            boat.rotation = Math.random() < 0.5 ? yawLeft : yawRight;
+            boat.speed = 0.08 + Math.random() * 0.15;
+            const sign = BOAT_FORWARD_SIGNS[boat.modelPath] ?? 1;
+            boat.direction = new Vector2(Math.cos(boat.rotation), Math.sin(boat.rotation)).multiplyScalar(sign);
+            boat.isMoving = true;
+            return boat;
+        });
+        setBoats(spawned);
+    }, [boatConfig.maxBoats]);
 
-		const currentTime = state.clock.elapsedTime;
-		if (currentTime - lastUpdate < 0.016) return;
+    useFrame((_, delta) => {
+        if (boats.length === 0) return;
+        setBoats((prev) => {
+            const { right2 } = getCameraBasisXZ(camera);
 
-		setBoats((prevBoats) => {
-			const updatedBoats = prevBoats.map((boat) => {
-				const updatedBoat = { ...boat };
+            const kept: BoatProps[] = [];
+            const removedSides: Array<'left' | 'right'> = [];
 
-				const collisionInfo = checkPotentialCollision(
-					boat,
-					prevBoats,
-					boatConfig,
-				);
+            for (const b of prev) {
+                const cam2 = new Vector2(camera.position.x, camera.position.z);
+                const cur2 = new Vector2(b.position.x, b.position.z);
+                const radial = cur2.distanceTo(cam2);
 
-				if (collisionInfo.hasCollision) {
-					updatedBoat.isMoving = false;
-				} else {
-					updatedBoat.isMoving = true;
-				}
+                const baseSpeed = b.speed && b.speed > 0 ? b.speed : 0.1;
+                const effSpeed = computeEffectiveSpeed(
+                    baseSpeed,
+                    radial,
+                    FOV_CONFIG.minDistance,
+                    FOV_CONFIG.maxDistance,
+                );
 
-				if (updatedBoat.isMoving) {
-					const newPosition = new Vector3(
-						updatedBoat.position.x +
-							updatedBoat.direction.x * updatedBoat.speed * deltaTime,
-						updatedBoat.position.y,
-						updatedBoat.position.z +
-							updatedBoat.direction.y * updatedBoat.speed * deltaTime,
-					);
+                const dir = b.direction ?? new Vector2(Math.cos(b.rotation), Math.sin(b.rotation));
+                const nextPos = new Vector3(
+                    b.position.x + dir.x * effSpeed * delta,
+                    0,
+                    b.position.z + dir.y * effSpeed * delta,
+                );
 
-					if (!isInFieldOfView(newPosition)) {
-						const centerDirection = new Vector2(
-							FOV_CONFIG.cameraPosition.x - newPosition.x,
-							FOV_CONFIG.cameraPosition.z - newPosition.z,
-						).normalize();
+                const ndc = nextPos.clone().project(camera);
+                const inView = ndc.z > -1 && ndc.z < 1 && Math.abs(ndc.x) <= 1 && Math.abs(ndc.y) <= 1 &&
+                    radial >= FOV_CONFIG.minDistance && radial <= FOV_CONFIG.maxDistance;
 
-						updatedBoat.direction = centerDirection;
-						updatedBoat.rotation = Math.atan2(
-							centerDirection.y,
-							centerDirection.x,
-						);
+                if (!inView) {
+                    const toBoat = new Vector2(nextPos.x - camera.position.x, nextPos.z - camera.position.z).normalize();
+                    const lateral = right2.dot(toBoat);
+                    const side: 'left' | 'right' = lateral >= 0 ? 'right' : 'left';
+                    removedSides.push(side);
+                    continue;
+                }
 
-						const clampedPosition = newPosition.clone();
-						const distance = clampedPosition.distanceTo(
-							FOV_CONFIG.cameraPosition,
-						);
+                kept.push({ ...b, position: nextPos, direction: dir, isMoving: true });
+            }
 
-						if (distance > FOV_CONFIG.maxDistance) {
-							const scale = FOV_CONFIG.maxDistance / distance;
-							clampedPosition.x =
-								FOV_CONFIG.cameraPosition.x +
-								(clampedPosition.x - FOV_CONFIG.cameraPosition.x) * scale;
-							clampedPosition.z =
-								FOV_CONFIG.cameraPosition.z +
-								(clampedPosition.z - FOV_CONFIG.cameraPosition.z) * scale;
-						} else if (distance < FOV_CONFIG.minDistance) {
-							const scale = FOV_CONFIG.minDistance / distance;
-							clampedPosition.x =
-								FOV_CONFIG.cameraPosition.x +
-								(clampedPosition.x - FOV_CONFIG.cameraPosition.x) * scale;
-							clampedPosition.z =
-								FOV_CONFIG.cameraPosition.z +
-								(clampedPosition.z - FOV_CONFIG.cameraPosition.z) * scale;
-						}
+            for (const side of removedSides) {
+                const opposite: 'left' | 'right' = side === 'left' ? 'right' : 'left';
+                const { position, yaw } = generatePositionOnSide(opposite);
+                const boat = createRandomBoat(`boat-${Date.now()}-${Math.random()}`, boatConfig);
+                boat.position = position;
+                boat.rotation = yaw;
+                boat.speed = 0.08 + Math.random() * 0.07;
+                const sign = BOAT_FORWARD_SIGNS[boat.modelPath] ?? 1;
+                boat.direction = new Vector2(Math.cos(boat.rotation), Math.sin(boat.rotation)).multiplyScalar(sign);
+                boat.isMoving = true;
+                kept.push(boat);
+            }
 
-						updatedBoat.position = clampedPosition;
-					} else {
-						updatedBoat.position = newPosition;
-					}
-				}
-
-				if (Math.random() < 0.003 && updatedBoat.isMoving) {
-					updatedBoat.direction = generateRandomDirection();
-					updatedBoat.rotation = Math.atan2(
-						updatedBoat.direction.y,
-						updatedBoat.direction.x,
-					);
-					updatedBoat.speed = generateRandomSpeed(boatConfig);
-				}
-
-				return updatedBoat;
-			});
-
-			const boatsInView = updatedBoats.filter((boat) =>
-				isInFieldOfView(boat.position),
-			);
-			const boatsToAdd = boatConfig.maxBoats - boatsInView.length;
-
-			if (boatsToAdd > 0) {
-				for (let i = 0; i < boatsToAdd; i++) {
-					const newBoat = createRandomBoat(
-						`boat-${Date.now()}-${i}`,
-						boatConfig,
-					);
-					newBoat.position = generatePositionInFOV();
-					newBoat.direction = generateRandomDirection();
-					newBoat.rotation = Math.atan2(
-						newBoat.direction.y,
-						newBoat.direction.x,
-					);
-					newBoat.speed = generateRandomSpeed(boatConfig);
-					newBoat.isMoving = true;
-					boatsInView.push(newBoat);
-				}
-			}
-
-			return boatsInView;
-		});
-
-		setLastUpdate(currentTime);
-	});
+            const targetCount = 5;
+            if (kept.length > targetCount) kept.length = targetCount;
+            return kept;
+        });
+    });
 
 	return (
 		<>

@@ -5,9 +5,8 @@ import { Suspense } from 'react';
 import styles from './mainCanvas.module.css';
 import Skybox from './Skybox';
 import Ocean from './Ocean';
-import { OrbitControls } from '@react-three/drei';
 import Stars from './Stars';
-// import CameraMovement from './CameraMovement';
+import CameraMovement from './CameraMovement';
 import BoatSystem from './Boats';
 
 const FOV = 30;
@@ -27,8 +26,8 @@ function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
 				skybox={'/static/images/skybox/skybox.hdr'}
 				intensity={skyboxIntensity}
 			/>
-			{/* <CameraMovement /> */}
-			<OrbitControls />
+			<CameraMovement />
+			{/* <OrbitControls /> */}
 			<ambientLight intensity={0.3} />
 			<directionalLight position={[10, 10, 5]} intensity={0.5} />
 			<Stars

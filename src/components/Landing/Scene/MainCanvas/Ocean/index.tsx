@@ -31,7 +31,7 @@ export default function Ocean() {
 	return (
 		<mesh rotation-x={-Math.PI / 2} position-y={0} receiveShadow>
 			<planeGeometry args={[256, 256, 32, 32]} />
-			<CustomShaderMaterial
+            <CustomShaderMaterial
 				ref={materialRef}
 				baseMaterial={THREE.MeshStandardMaterial}
 				vertexShader={vertexShader}
@@ -51,10 +51,11 @@ export default function Ocean() {
 					uRimColor: { value: new THREE.Color('#FFB74D') },
 					uTextureSize: { value: 45 },
 				}}
-				color='#0288D1'
+                color='#0288D1'
 				normalMap={normal}
 				normalScale={new THREE.Vector2(0.5, 0.5)}
-				transparent
+                transparent
+                opacity={0.85}
 			/>
 		</mesh>
 	);

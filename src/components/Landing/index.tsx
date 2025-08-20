@@ -1,30 +1,15 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './landing.module.css';
 import MainCanvas from '@/components/Landing/Scene/MainCanvas';
-import ThemeCanvas from '@/components/Landing/Scene/ThemeCanvas';
+import { useSkybox } from '@/contexts/SkyboxContext';
 
 function Landing() {
-	const [skyboxIntensity, setSkyboxIntensity] = useState(1);
-	const [isDay, setIsDay] = useState(true);
-
-	const handleSkyboxIntensity = (intensity: number) => {
-		setSkyboxIntensity(intensity);
-	};
-
-	const handleIsDay = (isDay: boolean) => {
-		setIsDay(isDay);
-	};
-
+	const { skyboxIntensity } = useSkybox();
 	return (
 		<div className={styles.wrapper}>
 			<MainCanvas skyboxIntensity={skyboxIntensity} />
-			<ThemeCanvas
-				handleSkyboxIntensity={handleSkyboxIntensity}
-				isDay={isDay}
-				handleIsDay={handleIsDay}
-			/>
 		</div>
 	);
 }

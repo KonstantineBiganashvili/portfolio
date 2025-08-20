@@ -5,6 +5,7 @@ const Skybox = React.memo(function Skybox({
 	skybox,
 	intensity = 1,
 }: SkyboxProps) {
+	console.log('Skybox: Using intensity:', intensity);
 	return (
 		<Environment
 			files={skybox}

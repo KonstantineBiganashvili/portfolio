@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 import { Montserrat } from 'next/font/google';
 import './globals.css';
+import '@/styles/theme.css';
+import Layout from '@/components/Layout';
+import { ThemeProvider } from '@/contexts/ThemeContext';
+import { SkyboxProvider } from '@/contexts/SkyboxContext';
 
 const montserrat = Montserrat();
 
@@ -12,7 +16,13 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: RootLayoutProps) {
 	return (
 		<html lang='en'>
-			<body className={`${montserrat.className}`}>{children}</body>
+			<body className={`${montserrat.className}`}>
+				<ThemeProvider>
+					<SkyboxProvider>
+						<Layout>{children}</Layout>
+					</SkyboxProvider>
+				</ThemeProvider>
+			</body>
 		</html>
 	);
 }

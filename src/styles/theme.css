@@ -1,0 +1,58 @@
+:root {
+	--theme-primary: #0ea5e9;
+	--theme-secondary: #06b6d4;
+	--theme-accent: #f59e0b;
+	--theme-deep: #0369a1;
+	--theme-light: #bae6fd;
+	--theme-foam: #f0f9ff;
+	--theme-text-contrast: #ffffff;
+	--theme-bg-contrast: #0f172a;
+
+	--theme-text: var(--theme-deep);
+	--theme-background: var(--theme-foam);
+	--theme-border: var(--theme-light);
+	--theme-shadow: var(--theme-deep);
+
+	--theme-transition: color 0.3s ease, background-color 0.3s ease,
+		border-color 0.3s ease;
+}
+
+.theme-primary {
+	color: var(--theme-primary);
+}
+
+.theme-bg-primary {
+	background-color: var(--theme-primary);
+}
+
+.theme-secondary {
+	color: var(--theme-secondary);
+}
+
+.theme-bg-secondary {
+	background-color: var(--theme-secondary);
+}
+
+.theme-accent {
+	color: var(--theme-accent);
+}
+
+.theme-bg-accent {
+	background-color: var(--theme-accent);
+}
+
+.theme-text {
+	color: var(--theme-text);
+}
+
+.theme-background {
+	background-color: var(--theme-background);
+}
+
+.theme-border {
+	border-color: var(--theme-border);
+}
+
+.theme-transition {
+	transition: var(--theme-transition);
+}

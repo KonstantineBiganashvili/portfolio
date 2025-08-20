@@ -1,17 +1,33 @@
 'use client';
 
-import { Canvas } from '@react-three/fiber';
-import { Suspense } from 'react';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Suspense, useEffect } from 'react';
 import styles from './mainCanvas.module.css';
 import Skybox from './Skybox';
-import Ocean from './Ocean';
+import Ocean from './LiquidSphere';
 import Stars from './Stars';
-import CameraMovement from './CameraMovement';
-import BoatSystem from './Boats';
+import { initializeMouseTracking } from '@/utils/mouseTracking';
+import { setupStaticCamera } from '@/utils/cameraUtils';
 
 const FOV = 30;
 
+function SceneSetup() {
+	const { camera } = useThree();
+
+	useEffect(() => {
+		const cleanup = initializeMouseTracking();
+		return cleanup;
+	}, []);
+
+	useFrame(() => {
+		setupStaticCamera(camera);
+	});
+
+	return null;
+}
+
 function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
+	console.log('MainCanvas: Received skyboxIntensity:', skyboxIntensity);
 	return (
 		<Canvas
 			className={styles.canvas}
@@ -26,8 +42,7 @@ function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
 				skybox={'/static/images/skybox/skybox.hdr'}
 				intensity={skyboxIntensity}
 			/>
-			<CameraMovement />
-			{/* <OrbitControls /> */}
+			<SceneSetup />
 			<ambientLight intensity={0.3} />
 			<directionalLight position={[10, 10, 5]} intensity={0.5} />
 			<Stars
@@ -42,7 +57,6 @@ function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
 			<color attach='background' args={['#000020']} />
 			<Suspense fallback={null}>
 				<Ocean />
-				<BoatSystem />
 			</Suspense>
 		</Canvas>
 	);

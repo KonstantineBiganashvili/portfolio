@@ -12,11 +12,8 @@ function ThemeCanvas({
 	return (
 		<Canvas
 			style={{
-				position: 'fixed',
-				top: '0px',
-				right: '0px',
-				width: '100px',
-				height: '100px',
+				width: '60px',
+				height: '60px',
 				zIndex: 10,
 				pointerEvents: 'auto',
 			}}

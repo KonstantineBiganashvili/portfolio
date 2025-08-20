@@ -3,12 +3,14 @@ import { useLoader, useFrame } from '@react-three/fiber';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { useSpring } from '@react-spring/three';
 import * as THREE from 'three';
+import { useTheme } from '@/contexts/ThemeContext';
 
 export default function SunMoon({
 	handleSkyboxIntensity,
 	handleIsDay,
 	isDay,
 }: SunMoonProps) {
+	const { toggleTheme } = useTheme();
 	const sun = useLoader(GLTFLoader, '/static/models/sun_low_poly.glb');
 	const moon = useLoader(GLTFLoader, '/static/models/moon_low_poly.glb');
 
@@ -28,6 +30,8 @@ export default function SunMoon({
 		onRest: () => {
 			setAnimating(false);
 			handleIsDay(!isDay);
+			// Update theme based on day/night state
+			toggleTheme();
 		},
 		onChange: ({ value: { t } }) => {
 			const dayI = 1.0,
@@ -35,6 +39,7 @@ export default function SunMoon({
 			const intensity = isDay
 				? dayI + (nightI - dayI) * t
 				: nightI + (dayI - nightI) * (1 - t);
+			console.log('SunMoon: Calling handleSkyboxIntensity with:', intensity);
 			handleSkyboxIntensity(intensity);
 		},
 	});

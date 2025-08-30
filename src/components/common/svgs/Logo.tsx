@@ -21,7 +21,7 @@ export default function Logo({
 	const { theme } = useTheme();
 
 	const backgroundFill = fillColor || theme.colors.primary;
-	const foregroundFill = textColor || theme.colors.text;
+	const foregroundFill = textColor || theme.colors.primaryText;
 
 	return (
 		<svg

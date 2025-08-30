@@ -9,10 +9,10 @@ export function useThemeCSS() {
 	const cssVars = {
 		primary: `var(${CSS_VARIABLES.PRIMARY})`,
 		secondary: `var(${CSS_VARIABLES.SECONDARY})`,
-		accent: `var(${CSS_VARIABLES.ACCENT})`,
-		deep: `var(${CSS_VARIABLES.DEEP})`,
-		light: `var(${CSS_VARIABLES.LIGHT})`,
-		foam: `var(${CSS_VARIABLES.FOAM})`,
+		accentText: `var(${CSS_VARIABLES.ACCENT_TEXT})`,
+		primaryText: `var(${CSS_VARIABLES.PRIMARY_TEXT})`,
+		secondaryText: `var(${CSS_VARIABLES.SECONDARY_TEXT})`,
+		background: `var(${CSS_VARIABLES.BACKGROUND})`,
 	};
 
 	const getCSSValue = (variable: keyof typeof CSS_VARIABLES) => {

@@ -50,7 +50,7 @@ export default function LiquidSphere() {
 			<mesh ref={outlineRef} position={[0, 6, -20]} receiveShadow>
 				<sphereGeometry args={[10.3, 64, 64]} />
 				<meshBasicMaterial
-					color={theme.colors.accent}
+					color={theme.colors.accentText}
 					transparent
 					opacity={0.25}
 					side={THREE.BackSide}
@@ -75,9 +75,9 @@ export default function LiquidSphere() {
 							uSteepness2: { value: wave2.steepness },
 							uWavelength2: { value: wave2.wavelength },
 							uSpeed2: { value: wave2.speed },
-							uColorDeep: { value: new THREE.Color(theme.colors.deep) },
-							uColorShallow: { value: new THREE.Color(theme.colors.light) },
-							uRimColor: { value: new THREE.Color(theme.colors.accent) },
+							uColorDeep: { value: new THREE.Color(theme.colors.primary) },
+							uColorShallow: { value: new THREE.Color(theme.colors.secondary) },
+							uRimColor: { value: new THREE.Color(theme.colors.accentText) },
 							uTextureSize: { value: 45 },
 						}}
 						color={theme.colors.primary}

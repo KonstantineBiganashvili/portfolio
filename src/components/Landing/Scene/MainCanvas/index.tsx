@@ -2,12 +2,12 @@
 
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useEffect } from 'react';
-import styles from './mainCanvas.module.css';
 import Skybox from './Skybox';
 import Ocean from './LiquidSphere';
 import Stars from './Stars';
 import { initializeMouseTracking } from '@/utils/mouseTracking';
 import { setupStaticCamera } from '@/utils/cameraUtils';
+import { useTheme } from '@/contexts/ThemeContext';
 
 const FOV = 30;
 
@@ -27,15 +27,23 @@ function SceneSetup() {
 }
 
 function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
-	console.log('MainCanvas: Received skyboxIntensity:', skyboxIntensity);
+	const { theme } = useTheme();
+
+	const backgroundColor = theme.mode === 'light' ? '#E0F2FE' : '#000020';
+
 	return (
 		<Canvas
-			className={styles.canvas}
 			camera={{
 				fov: FOV,
 				near: 0.1,
 				far: 500,
 				position: [0, 10, 10],
+			}}
+			style={{
+				position: 'fixed',
+				top: 0,
+				left: 0,
+				zIndex: 1,
 			}}
 		>
 			<Skybox
@@ -54,7 +62,7 @@ function MainCanvas({ skyboxIntensity }: MainCanvasProps) {
 				brightness={1 - skyboxIntensity}
 				speed={1}
 			/>
-			<color attach='background' args={['#000020']} />
+			<color attach='background' args={[backgroundColor]} />
 			<Suspense fallback={null}>
 				<Ocean />
 			</Suspense>

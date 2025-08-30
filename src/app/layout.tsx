@@ -6,7 +6,10 @@ import Layout from '@/components/Layout';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { SkyboxProvider } from '@/contexts/SkyboxContext';
 
-const montserrat = Montserrat();
+const montserrat = Montserrat({
+	subsets: ['latin'],
+	weight: ['400', '500', '600', '700'],
+});
 
 export const metadata: Metadata = {
 	title: 'Konstantine Biganashvili',

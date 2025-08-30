@@ -1,0 +1,88 @@
+.timelineContainer {
+	position: absolute;
+	left: 50%;
+	top: 60px;
+	bottom: 60px;
+	width: 3px;
+	transform: translateX(-50%);
+	z-index: 1;
+}
+
+.timelineBackground {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(var(--theme-border), 0.3);
+	border-radius: 2px;
+}
+
+.timelineProgress {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 0%;
+	background: linear-gradient(
+		180deg,
+		var(--theme-primary) 0%,
+		var(--theme-secondary) 50%,
+		var(--theme-primary) 100%
+	);
+	border-radius: 2px;
+	box-shadow: 0 0 20px rgba(14, 165, 233, 0.3);
+	transform-origin: top;
+}
+
+.ufoContainer {
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	opacity: 1;
+	pointer-events: none;
+	will-change: transform;
+}
+
+@keyframes ufoFloat {
+	0%,
+	100% {
+		margin-top: 0px;
+	}
+	50% {
+		margin-top: -5px;
+	}
+}
+
+.ufoContainer.active {
+	animation: ufoFloat 3s ease-in-out infinite;
+}
+
+@keyframes ufoLegTrail {
+	0% {
+		transform: translateY(0px);
+	}
+	50% {
+		transform: translateY(5px);
+	}
+	100% {
+		transform: translateY(0px);
+	}
+}
+
+.ufoContainer.active :global(.ufo-path-left) {
+	animation: ufoLegTrail 1.5s ease-in-out infinite;
+	animation-delay: 0s;
+}
+
+.ufoContainer.active :global(.ufo-path-middle) {
+	animation: ufoLegTrail 1.5s ease-in-out infinite;
+	animation-delay: 0.2s;
+}
+
+.ufoContainer.active :global(.ufo-path-right) {
+	animation: ufoLegTrail 1.5s ease-in-out infinite;
+	animation-delay: 0.4s;
+}

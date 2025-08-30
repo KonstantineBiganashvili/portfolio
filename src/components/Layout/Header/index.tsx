@@ -11,7 +11,7 @@ interface HeaderProps {
 
 function Header({ handleSkyboxIntensity, isDay, handleIsDay }: HeaderProps) {
 	return (
-		<div className={styles.wrapper}>
+		<div className={styles.headerWrapper}>
 			<Logo width={60} height={60} />
 			<ThemeCanvas
 				handleSkyboxIntensity={handleSkyboxIntensity}

@@ -1,4 +1,4 @@
-.wrapper {
+.headerWrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -8,9 +8,10 @@
 	align-items: center;
 	justify-content: space-between;
 	padding: 0 20px;
-	background-color: rgba(var(--theme-bg-contrast-rgb), 0.75);
+	background-color: rgba(var(--theme-card-background-rgb), 0.75);
 	backdrop-filter: blur(10px);
-	color: var(--theme-text);
+	color: var(--theme-primary-text);
+	border-bottom: 1px solid var(--theme-border);
 	z-index: 100;
 	transition: var(--theme-transition);
 }

@@ -30,7 +30,6 @@ export default function SunMoon({
 		onRest: () => {
 			setAnimating(false);
 			handleIsDay(!isDay);
-			// Update theme based on day/night state
 			toggleTheme();
 		},
 		onChange: ({ value: { t } }) => {
@@ -39,7 +38,6 @@ export default function SunMoon({
 			const intensity = isDay
 				? dayI + (nightI - dayI) * t
 				: nightI + (dayI - nightI) * (1 - t);
-			console.log('SunMoon: Calling handleSkyboxIntensity with:', intensity);
 			handleSkyboxIntensity(intensity);
 		},
 	});

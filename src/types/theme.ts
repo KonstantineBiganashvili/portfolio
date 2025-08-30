@@ -3,13 +3,19 @@ export type ThemeMode = 'light' | 'dark';
 export interface ColorPalette {
 	primary: string;
 	secondary: string;
-	accent: string;
-	deep: string;
-	light: string;
-	foam: string;
-	text: string; // High contrast text color
-	background: string; // High contrast background color
-	backgroundRgb: string; // RGB values for opacity control
+	background: string;
+	cardBackground: string;
+	mutedBackground: string;
+	primaryText: string;
+	secondaryText: string;
+	accentText: string;
+	border: string;
+	error: string;
+	success: string;
+	warning: string;
+	backgroundRgb: string;
+	cardBackgroundRgb: string;
+	mutedBackgroundRgb: string;
 }
 
 export interface ThemeColors {
@@ -23,28 +29,39 @@ export interface Theme {
 	isDay: boolean;
 }
 
-// Ocean Depths palette (recommended)
 export const THEME_COLORS: ThemeColors = {
 	light: {
-		primary: '#0EA5E9', // Sky Blue
-		secondary: '#06B6D4', // Cyan
-		accent: '#F59E0B', // Amber
-		deep: '#0369A1', // Deep Blue
-		light: '#BAE6FD', // Light Blue
-		foam: '#F0F9FF', // Ice Blue
-		text: '#FFFFFF', // Pure white for maximum contrast
-		background: '#0F172A', // Very dark blue for high contrast
-		backgroundRgb: '15, 23, 42', // RGB values for rgba() usage
+		primary: '#0EA5E9',
+		secondary: '#22D3EE',
+		background: '#F0F9FF',
+		cardBackground: '#FFFFFF',
+		mutedBackground: '#E2E8F0',
+		primaryText: '#0F172A',
+		secondaryText: '#334155',
+		accentText: '#0EA5E9',
+		border: '#CBD5E1',
+		error: '#DC2626',
+		success: '#16A34A',
+		warning: '#F59E0B',
+		backgroundRgb: '240, 249, 255',
+		cardBackgroundRgb: '255, 255, 255',
+		mutedBackgroundRgb: '226, 232, 240',
 	},
 	dark: {
-		primary: '#0C4A6E', // Deep Ocean
-		secondary: '#0E7490', // Teal
-		accent: '#1E40AF', // Indigo
-		deep: '#1E293B', // Slate
-		light: '#334155', // Slate Gray
-		foam: '#475569', // Cool Gray
-		text: '#F8FAFC', // Near white for maximum contrast
-		background: '#020617', // Very dark slate for high contrast
-		backgroundRgb: '2, 6, 23', // RGB values for rgba() usage
+		primary: '#0EA5E9',
+		secondary: '#06B6D4',
+		background: '#0F172A',
+		cardBackground: '#1E293B',
+		mutedBackground: '#334155',
+		primaryText: '#F8FAFC',
+		secondaryText: '#CBD5E1',
+		accentText: '#38BDF8',
+		border: '#475569',
+		error: '#F87171',
+		success: '#4ADE80',
+		warning: '#FACC15',
+		backgroundRgb: '15, 23, 42',
+		cardBackgroundRgb: '30, 41, 59',
+		mutedBackgroundRgb: '51, 65, 85',
 	},
 };

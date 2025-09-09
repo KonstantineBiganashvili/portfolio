@@ -3,14 +3,6 @@
 import React from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 
-interface LogoProps {
-	width?: number;
-	height?: number;
-	className?: string;
-	fillColor?: string;
-	textColor?: string;
-}
-
 export default function Logo({
 	width = 270,
 	height = 270,
@@ -57,4 +49,12 @@ export default function Logo({
 			</g>
 		</svg>
 	);
+}
+
+interface LogoProps {
+	width?: number;
+	height?: number;
+	className?: string;
+	fillColor?: string;
+	textColor?: string;
 }

@@ -1,11 +1,26 @@
 .timelineContainer {
 	position: absolute;
 	left: 50%;
-	top: 60px;
+	top: 7px;
 	bottom: 60px;
 	width: 3px;
 	transform: translateX(-50%);
 	z-index: 1;
+}
+
+@media (max-width: 768px) {
+	.timelineContainer {
+		left: auto;
+		top: 30px;
+		right: 30px;
+		transform: none;
+	}
+}
+
+@media (max-width: 480px) {
+	.timelineContainer {
+		right: 25px;
+	}
 }
 
 .timelineBackground {

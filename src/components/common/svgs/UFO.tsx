@@ -1,12 +1,5 @@
 import React from 'react';
 
-interface UFOProps {
-	width?: string | number;
-	height?: string | number;
-	className?: string;
-	fill?: string;
-}
-
 const UFO: React.FC<UFOProps> = ({
 	width = '24',
 	height = '24',
@@ -55,3 +48,10 @@ const UFO: React.FC<UFOProps> = ({
 };
 
 export default UFO;
+
+interface UFOProps {
+	width?: string | number;
+	height?: string | number;
+	className?: string;
+	fill?: string;
+}

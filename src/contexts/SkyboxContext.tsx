@@ -11,7 +11,6 @@ import { useTheme } from './ThemeContext';
 
 interface SkyboxContextType {
 	skyboxIntensity: number;
-	handleSkyboxIntensity: (intensity: number) => void;
 }
 
 const SkyboxContext = createContext<SkyboxContextType | undefined>(undefined);
@@ -27,12 +26,8 @@ export function SkyboxProvider({ children }: { children: ReactNode }) {
 		setSkyboxIntensity(newIntensity);
 	}, [theme.mode]);
 
-	const handleSkyboxIntensity = (intensity: number) => {
-		setSkyboxIntensity(intensity);
-	};
-
 	return (
-		<SkyboxContext.Provider value={{ skyboxIntensity, handleSkyboxIntensity }}>
+		<SkyboxContext.Provider value={{ skyboxIntensity }}>
 			{children}
 		</SkyboxContext.Provider>
 	);

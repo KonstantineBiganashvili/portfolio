@@ -7,3 +7,9 @@
 	color: var(--theme-primary-text);
 	transition: var(--theme-transition);
 }
+
+.content {
+	width: 100%;
+	max-width: 1200px;
+	margin: 0 auto;
+}

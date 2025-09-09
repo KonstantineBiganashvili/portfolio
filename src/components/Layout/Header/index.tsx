@@ -1,25 +1,20 @@
 import React from 'react';
 import styles from './header.module.css';
 import Logo from '@/components/common/svgs/Logo';
-import ThemeCanvas from '@/components/Landing/Scene/ThemeCanvas';
+import ThemeSwitch from '@/components/common/ThemeSwitch';
 
-interface HeaderProps {
-	handleSkyboxIntensity: (intensity: number) => void;
-	isDay: boolean;
-	handleIsDay: (isDay: boolean) => void;
-}
+function Header() {
 
-function Header({ handleSkyboxIntensity, isDay, handleIsDay }: HeaderProps) {
+
 	return (
 		<div className={styles.headerWrapper}>
-			<Logo width={60} height={60} />
-			<ThemeCanvas
-				handleSkyboxIntensity={handleSkyboxIntensity}
-				isDay={isDay}
-				handleIsDay={handleIsDay}
-			/>
+			<div className={styles.headerContent}>
+				<Logo width={60} height={60} />
+				<ThemeSwitch />
+			</div>
 		</div>
 	);
 }
 
 export default Header;
+

@@ -1,7 +1,6 @@
 .myJourneyWrapper {
-	position: relative;
 	width: 100%;
-	padding: 60px 20px;
+	max-width: 1200px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -9,13 +8,47 @@
 	gap: 40px;
 }
 
+.myJourneyContent {
+	position: relative;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 40px;
+}
+
+.myJourneyHeader {
+	text-align: center;
+	margin-bottom: 20px;
+	z-index: 3;
+}
+
+.myJourneyTitle {
+	font-size: 3rem;
+	font-weight: 700;
+	color: var(--theme-primary-text);
+	margin: 0 0 16px 0;
+	background: linear-gradient(135deg, #0f4c75, #2980b9);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.myJourneySubtitle {
+	font-size: 1.2rem;
+	color: var(--theme-secondary-text);
+	margin: 0;
+	opacity: 0.9;
+	line-height: 1.6;
+}
+
 .myJourneyItem {
 	position: relative;
 	display: flex;
 	align-items: flex-start;
 	gap: 20px;
-	width: 100%;
-	max-width: 500px;
+	width: calc(50% - 20px);
 	padding: 24px 28px;
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
@@ -27,13 +60,13 @@
 }
 
 .myJourneyItemEven {
-	align-self: center;
-	transform: translateX(calc(-50% - 10px));
+	align-self: flex-start;
+	margin-right: auto;
 }
 
 .myJourneyItemOdd {
-	align-self: center;
-	transform: translateX(calc(50% + 10px));
+	align-self: flex-end;
+	margin-left: auto;
 }
 
 .myJourneyItem:hover {
@@ -43,11 +76,11 @@
 }
 
 .myJourneyItemEven:hover {
-	transform: translateX(calc(-50% - 10px)) scale(1.02);
+	transform: translateY(-8px) scale(1.02);
 }
 
 .myJourneyItemOdd:hover {
-	transform: translateX(calc(50% + 10px)) scale(1.02);
+	transform: translateY(-8px) scale(1.02);
 }
 
 .myJourneyItemNumber {
@@ -67,7 +100,8 @@
 	font-weight: 700;
 	font-size: 1.1rem;
 	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
-	border: 2px solid rgba(255, 255, 255, 0.2);
+	border: 2px solid transparent;
+	background-clip: padding-box;
 }
 
 .myJourneyItemContent {
@@ -111,27 +145,44 @@
 		max-width: 100%;
 	}
 
-	.myJourneyWrapper::before {
-		left: 24px;
-		transform: none;
+	.myJourneyContent {
+		align-items: flex-start;
+	}
+
+	.myJourneyHeader {
+		align-self: center;
+		margin-bottom: 15px;
+	}
+
+	.myJourneyTitle {
+		font-size: 2.5rem;
+	}
+
+	.myJourneySubtitle {
+		font-size: 1.1rem;
 	}
 
 	.myJourneyItem {
-		margin-left: 0 !important;
-		margin-right: 0 !important;
-		margin-left: 50px;
-		transform: none !important;
-		max-width: calc(100% - 50px);
-		align-self: stretch !important;
+		width: calc(100% - 60px);
+		margin-left: 0;
+		margin-right: 60px;
+		align-self: flex-start !important;
+	}
+
+	.myJourneyItemEven,
+	.myJourneyItemOdd {
+		align-self: flex-start !important;
+		margin-left: 0;
+		margin-right: 60px;
 	}
 
 	.myJourneyItem:hover {
-		transform: translateY(-4px) scale(1.01) !important;
+		transform: translateY(-4px) scale(1.01);
 	}
 
-	.myJourneyItem::before {
-		left: -32px !important;
-		right: auto !important;
+	.myJourneyItemEven:hover,
+	.myJourneyItemOdd:hover {
+		transform: translateY(-4px) scale(1.01);
 	}
 
 	.myJourneyItemNumber {
@@ -154,11 +205,25 @@
 		padding: 30px 10px;
 	}
 
+	.myJourneyTitle {
+		font-size: 2rem;
+		line-height: 1.2;
+	}
+
+	.myJourneySubtitle {
+		font-size: 1rem;
+	}
+
 	.myJourneyItem {
 		padding: 20px;
 		gap: 16px;
-		margin-left: 40px;
-		max-width: calc(100% - 40px);
+		width: calc(100% - 50px);
+		margin-right: 50px;
+	}
+
+	.myJourneyItemEven,
+	.myJourneyItemOdd {
+		margin-right: 50px;
 	}
 
 	.myJourneyItemNumber {

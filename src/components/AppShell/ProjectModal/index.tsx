@@ -8,7 +8,7 @@ import styles from './projectModal.module.css';
 import { ExternalLink } from 'lucide-react';
 
 interface ProjectData {
-	id: number;
+	id: string;
 	title: string;
 	shortDescription: string;
 	fullDescription: string;

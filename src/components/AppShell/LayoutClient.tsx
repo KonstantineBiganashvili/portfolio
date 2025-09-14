@@ -32,7 +32,7 @@ export default function LayoutClient({
 	useEffect(() => {
 		if (!mounted) return;
 		if (projectId) {
-			const project = projectsData.find((p) => p.id === Number(projectId));
+			const project = projectsData.find((p) => p.id === projectId);
 			setSelectedProject(project || null);
 		} else {
 			setSelectedProject(null);

@@ -29,7 +29,7 @@ function RecentWorks() {
 								fill
 								className={styles.projectImageElement}
 								sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
-								priority={project.id <= 2}
+								priority={true}
 							/>
 							<div className={styles.projectImageOverlay}>
 								<Link

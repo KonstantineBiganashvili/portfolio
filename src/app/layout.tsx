@@ -12,6 +12,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+	metadataBase: new URL('https://biganashvili.dev'),
 	title: 'Konstantine Biganashvili - Full Stack Developer',
 	description:
 		'Software Engineer with 6+ years of experience building modern web applications. Specializing in Next.js, NestJS, TypeScript, and cloud technologies (AWS, GCP). Explore my portfolio featuring innovative projects and technical expertise.',

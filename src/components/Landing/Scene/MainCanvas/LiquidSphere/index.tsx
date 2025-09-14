@@ -1,6 +1,6 @@
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
-import { useFrame } from '@react-three/fiber';
+import { useFrame, useThree } from '@react-three/fiber';
 import CustomShaderMaterial from 'three-custom-shader-material';
 import vertexShader from '@/shaders/ocean/vertex';
 import fragmentShader from '@/shaders/ocean/fragment';
@@ -14,6 +14,7 @@ const wave1 = {
 	wavelength: 8.0,
 	speed: 1.0,
 };
+
 const wave2 = {
 	dir: new THREE.Vector2(1, 0.5),
 	steepness: 0.1,
@@ -23,10 +24,33 @@ const wave2 = {
 
 export default function LiquidSphere() {
 	const { theme } = useTheme();
+	const { viewport } = useThree();
 	const materialRef = useRef<any>(null);
 	const groupRef = useRef<any>(null);
 	const outlineRef = useRef<any>(null);
 	const normal = useTexture('/static/images/ocean/normals.jpeg');
+
+	const [spherePosition, setSpherePosition] = useState({ x: 0, y: 6, z: -35 });
+
+	useEffect(() => {
+		const updatePosition = () => {
+			const width = viewport.width;
+
+			let zDistance = -35;
+
+			if (width < 6) {
+				zDistance = -55;
+			} else if (width < 10) {
+				zDistance = -45;
+			} else if (width < 14) {
+				zDistance = -40;
+			}
+
+			setSpherePosition({ x: 0, y: 6, z: zDistance });
+		};
+
+		updatePosition();
+	}, [viewport.width]);
 
 	useFrame(({ clock }) => {
 		if (!materialRef.current) return;
@@ -36,18 +60,30 @@ export default function LiquidSphere() {
 			groupRef.current.rotation.y = clock.getElapsedTime() * 0.1;
 
 			const liquidOffsetX = -mousePosition.x * 1.5;
-			groupRef.current.position.x = liquidOffsetX;
+			groupRef.current.position.set(
+				spherePosition.x + liquidOffsetX,
+				spherePosition.y,
+				spherePosition.z,
+			);
 		}
 
 		if (outlineRef.current) {
 			const outlineOffsetX = mousePosition.x;
-			outlineRef.current.position.x = outlineOffsetX;
+			outlineRef.current.position.set(
+				spherePosition.x + outlineOffsetX,
+				spherePosition.y,
+				spherePosition.z,
+			);
 		}
 	});
 
 	return (
 		<>
-			<mesh ref={outlineRef} position={[0, 6, -20]} receiveShadow>
+			<mesh
+				ref={outlineRef}
+				position={[spherePosition.x, spherePosition.y, spherePosition.z]}
+				receiveShadow
+			>
 				<sphereGeometry args={[10.3, 64, 64]} />
 				<meshBasicMaterial
 					color={theme.colors.accentText}
@@ -57,7 +93,10 @@ export default function LiquidSphere() {
 				/>
 			</mesh>
 
-			<group ref={groupRef} position={[0, 6, -20]}>
+			<group
+				ref={groupRef}
+				position={[spherePosition.x, spherePosition.y, spherePosition.z]}
+			>
 				<mesh receiveShadow>
 					<sphereGeometry args={[10, 64, 64]} />
 					<CustomShaderMaterial

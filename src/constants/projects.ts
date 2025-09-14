@@ -10,6 +10,7 @@ export const projectsData = [
 		infrastructure: 'AWS (EC2, S3, CloudFront, Route 53, Formspree)',
 		status: 'live',
 		liveUrl: 'https://exists.ai',
+		image: '/static/images/projects/exists-ai.webp',
 		details: {
 			frontend:
 				'Built with Next.js 14 and TypeScript for type safety and performance. Styled with Tailwind CSS for rapid development and consistent design. GSAP animations provide smooth, engaging user interactions.',
@@ -42,6 +43,7 @@ export const projectsData = [
 			'GCP (Cloud Run, Cloud Build, Cloud Storage, IAM), Supabase, MediaCMS',
 		status: 'live',
 		liveUrl: 'https://app.exists.ai',
+		image: '/static/images/projects/app-exists-ai.webp',
 		details: {
 			frontend:
 				'Advanced React application using Next.js, React Three Fiber for 3D map representation, Fabric.js for canvas manipulation, and GSAP for complex animations. Responsive design with Tailwind CSS.',

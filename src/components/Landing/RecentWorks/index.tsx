@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import Image from 'next/image';
 import styles from './recentWorks.module.css';
 import Badge from '@/components/common/Badge';
 import Link from 'next/link';
@@ -22,15 +23,13 @@ function RecentWorks() {
 				{projectsData.map((project) => (
 					<div key={project.id} className={styles.projectCard}>
 						<div className={styles.projectImage}>
-							<iframe
-								src={project.liveUrl}
-								className={styles.projectIframe}
-								title={`${project.title} preview`}
-								sandbox='allow-scripts allow-same-origin allow-forms allow-popups'
-								loading='lazy'
-								onError={() => {
-									console.log('Error loading iframe');
-								}}
+							<Image
+								src={project.image}
+								alt={`${project.title} preview`}
+								fill
+								className={styles.projectImageElement}
+								sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+								priority={project.id <= 2}
 							/>
 							<div className={styles.projectImageOverlay}>
 								<Link

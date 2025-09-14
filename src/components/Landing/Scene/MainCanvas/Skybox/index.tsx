@@ -10,7 +10,7 @@ const Skybox = React.memo(function Skybox({
 			files={skybox}
 			background
 			backgroundIntensity={intensity}
-			resolution={4096}
+			resolution={1024}
 			backgroundBlurriness={0}
 		/>
 	);

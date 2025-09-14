@@ -1,0 +1,334 @@
+.contactInfoWrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: 16px;
+	height: 100%;
+}
+
+.contactInfo {
+	width: 100%;
+	background: rgba(var(--theme-card-background-rgb), 0.95);
+	backdrop-filter: blur(12px);
+	border-radius: 24px;
+	border: 1px solid var(--theme-border);
+	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+	padding: 32px;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.contactInfo:hover {
+	transform: translateY(-4px);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+	border-color: var(--theme-primary);
+}
+
+.infoTitle {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: var(--theme-primary-text);
+	margin: 0;
+}
+
+.contactDetails {
+	display: flex;
+	flex-direction: column;
+	gap: 32px;
+}
+
+.contactItem {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	background: rgba(var(--theme-border-rgb), 0.05);
+	border-radius: 12px;
+	border: 1px solid rgba(var(--theme-border-rgb), 0.1);
+	transition: all 0.3s ease;
+}
+
+.contactItem:hover {
+	background: rgba(var(--theme-primary-rgb), 0.05);
+	border-color: rgba(var(--theme-primary-rgb), 0.2);
+}
+
+.contactIcon {
+	width: 40px;
+	height: 40px;
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 1rem;
+	flex-shrink: 0;
+}
+
+.contactContent {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.contactLabel {
+	font-size: 0.9rem;
+	color: var(--theme-secondary-text);
+	font-weight: 500;
+}
+
+.contactValue {
+	font-size: 1.1rem;
+	color: var(--theme-primary-text);
+	font-weight: 600;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.contactValue:hover {
+	color: var(--theme-primary);
+}
+
+.socialSection {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.socialTitle {
+	font-size: 1.3rem;
+	font-weight: 600;
+	color: var(--theme-primary-text);
+	margin: 0;
+}
+
+.socialLinks {
+	display: flex;
+	gap: 12px;
+}
+
+.socialLink {
+	width: 48px;
+	height: 48px;
+	background: rgba(var(--theme-border-rgb), 0.1);
+	border: 2px solid var(--theme-border);
+	border-radius: 12px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+	transition: all 0.3s ease;
+	color: var(--theme-primary-text);
+}
+
+.socialLink:hover {
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	border-color: transparent;
+	transform: translateY(-2px) scale(1.05);
+	color: white;
+}
+
+.socialIcon {
+	font-size: 1.2rem;
+}
+
+.contactCtaSection {
+	text-align: center;
+}
+
+.contactCtaContent {
+	margin-bottom: 24px;
+}
+
+.contactCtaTitle {
+	font-size: 2rem;
+	font-weight: 700;
+	margin: 0 0 12px 0;
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.contactCtaButtons {
+	display: flex;
+	gap: 16px;
+	justify-content: center;
+	align-items: center;
+}
+
+button.contactScheduleButton,
+.contactResumeButton {
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	color: white;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 6px;
+	min-height: 48px;
+	min-width: 140px;
+	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.calendlyButtonWrapper {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	color: white;
+	border: none;
+	padding: 12px 24px;
+	border-radius: 12px;
+	font-size: 0.9rem;
+	font-weight: 600;
+	cursor: pointer;
+	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+	text-decoration: none;
+	min-height: 48px;
+	min-width: 140px;
+	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+}
+
+.calendlyButtonWrapper:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+}
+
+.calendlyButtonWrapper:active {
+	transform: translateY(0);
+}
+
+.calendlyButton {
+	background: transparent;
+	color: white;
+	border: none;
+	padding: 0;
+	font-size: inherit;
+	font-weight: inherit;
+	cursor: pointer;
+	text-decoration: none;
+}
+
+button.contactScheduleButton:hover,
+.contactResumeButton:hover,
+.calendlyButtonWrapper:hover {
+	transform: translateY(-2px);
+	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+}
+
+button.contactScheduleButton:active,
+.contactResumeButton:active,
+.calendlyButtonWrapper:active {
+	transform: translateY(0);
+}
+
+button.contactScheduleButton:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+	transform: none;
+	box-shadow: none;
+}
+
+.contactButtonIcon {
+	font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+	.contactInfo {
+		gap: 24px;
+	}
+
+	.contactIcon {
+		width: 36px;
+		height: 36px;
+		font-size: 0.9rem;
+	}
+
+	.socialSection {
+		padding: 20px;
+	}
+
+	.contactCtaTitle {
+		font-size: 1.7rem;
+	}
+
+	.contactCtaButtons {
+		flex-direction: column;
+		gap: 12px;
+	}
+
+	button.contactScheduleButton,
+	.contactResumeButton,
+	.calendlyButtonWrapper {
+		width: 100%;
+		min-width: auto;
+	}
+}
+
+@media (max-width: 480px) {
+	.contactInfo {
+		gap: 20px;
+	}
+
+	.contactDetails {
+		gap: 12px;
+	}
+
+	.contactItem {
+		gap: 12px;
+	}
+
+	.contactIcon {
+		width: 32px;
+		height: 32px;
+		font-size: 0.8rem;
+	}
+
+	.socialSection {
+		padding: 18px;
+	}
+
+	.socialLinks {
+		gap: 8px;
+	}
+
+	.socialLink {
+		width: 40px;
+		height: 40px;
+	}
+
+	.contactCtaTitle {
+		font-size: 1.5rem;
+		line-height: 1.2;
+	}
+}

@@ -8,6 +8,7 @@ interface ContactButtonProps {
 	onClick?: () => void;
 	className?: string;
 	type?: 'button' | 'submit' | 'reset';
+	disabled?: boolean;
 }
 
 function ContactButton({
@@ -15,13 +16,19 @@ function ContactButton({
 	onClick,
 	className,
 	type = 'button',
+	disabled = false,
 }: ContactButtonProps) {
 	const buttonClasses = [styles.contactButton, className]
 		.filter(Boolean)
 		.join(' ');
 
 	return (
-		<button className={buttonClasses} onClick={onClick} type={type}>
+		<button
+			className={buttonClasses}
+			onClick={onClick}
+			type={type}
+			disabled={disabled}
+		>
 			{children}
 		</button>
 	);

@@ -1,0 +1,264 @@
+.footer {
+	background-color: var(--theme-background);
+	border-top: 1px solid var(--theme-border);
+	margin-top: 80px;
+  z-index: 100;
+}
+
+.footerContent {
+	max-width: 1400px;
+	margin: 0 auto;
+	padding: 0 32px;
+}
+
+.footerMain {
+	display: grid;
+	grid-template-columns: 2fr 1fr 1fr;
+	gap: 48px;
+	padding: 64px 0 48px 0;
+}
+
+.brandSection {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.logoLink {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	color: var(--theme-primary-text);
+	text-decoration: none;
+	transition: all 0.3s ease;
+	border-radius: 12px;
+	width: fit-content;
+}
+
+.logoIcon {
+	width: 40px;
+	height: 40px;
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	border-radius: 10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	transition: all 0.3s ease;
+}
+
+.logoText {
+	font-weight: 600;
+	font-size: 1.2rem;
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary),
+		var(--theme-secondary)
+	);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+.logoLink:hover .logoIcon {
+	transform: scale(1.05);
+	box-shadow: 0 4px 12px rgba(var(--theme-primary-rgb), 0.4);
+}
+
+.brandDescription {
+	color: var(--theme-secondary-text);
+	line-height: 1.6;
+	font-size: 0.95rem;
+	margin: 0;
+}
+
+.socialLinks {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+}
+
+.socialLink {
+	width: 44px;
+	height: 44px;
+	background: rgba(var(--theme-border-rgb), 0.1);
+	border: 1px solid var(--theme-border);
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: var(--theme-secondary-text);
+	text-decoration: none;
+	transition: all 0.3s ease;
+}
+
+.socialLink:hover {
+	color: var(--theme-primary-text);
+	background: rgba(var(--theme-primary-rgb), 0.1);
+	border-color: var(--theme-primary);
+	transform: translateY(-2px);
+}
+
+.navigationSection,
+.contactSection {
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.sectionTitle {
+	font-size: 1.1rem;
+	font-weight: 600;
+	color: var(--theme-primary-text);
+	margin: 0;
+}
+
+.footerNav {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.navLink {
+	background: none;
+	border: none;
+	color: var(--theme-secondary-text);
+	font-size: 0.95rem;
+	font-weight: 500;
+	padding: 8px 0;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	text-align: left;
+	text-decoration: none;
+}
+
+.navLink:hover {
+	color: var(--theme-primary-text);
+	transform: translateX(4px);
+}
+
+.contactInfo {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.contactItem {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	color: var(--theme-secondary-text);
+	font-size: 0.95rem;
+}
+
+.contactItem a {
+	color: var(--theme-secondary-text);
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.contactItem a:hover {
+	color: var(--theme-primary);
+}
+
+.availabilityStatus {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	color: var(--theme-secondary-text);
+	font-size: 0.95rem;
+}
+
+.availabilityDot {
+	width: 12px;
+	height: 12px;
+	margin: 2px;
+	background: #16a34a;
+	border-radius: 50%;
+	animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+	50% {
+		opacity: 0.5;
+	}
+}
+
+.footerBottom {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 24px 0;
+	border-top: 1px solid var(--theme-border);
+}
+
+.copyright {
+	color: var(--theme-secondary-text);
+	font-size: 0.9rem;
+}
+
+.backToTop {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	background: none;
+	border: none;
+	color: var(--theme-secondary-text);
+	font-size: 0.9rem;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	padding: 8px 12px;
+	border-radius: 6px;
+}
+
+.backToTop:hover {
+	color: var(--theme-primary-text);
+	background: rgba(var(--theme-primary-rgb), 0.1);
+	transform: translateY(-2px);
+}
+
+@media (max-width: 1024px) {
+	.footerMain {
+		grid-template-columns: 1fr 1fr;
+		gap: 32px;
+	}
+
+	.brandSection {
+		grid-column: 1 / -1;
+	}
+}
+
+@media (max-width: 768px) {
+	.footerContent {
+		padding: 0 16px;
+	}
+
+	.footerMain {
+		grid-template-columns: 1fr;
+		gap: 32px;
+		padding: 48px 0 32px 0;
+	}
+
+	.footerBottom {
+		flex-direction: column;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.socialLinks {
+		gap: 8px;
+	}
+
+	.socialLink {
+		width: 40px;
+		height: 40px;
+	}
+}

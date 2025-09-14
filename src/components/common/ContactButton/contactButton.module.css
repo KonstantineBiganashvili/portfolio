@@ -2,6 +2,7 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+	gap: 8px;
 	padding: 12px 24px;
 	border-radius: 16px;
 	font-size: 0.95rem;
@@ -23,12 +24,12 @@
 }
 
 .contactButton:hover {
-	transform: translateY(-3px) scale(1.05);
+	transform: translateY(-2px);
 	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
 }
 
 .contactButton:active {
-	transform: translateY(-1px) scale(1.02);
+	transform: translateY(0);
 }
 
 .contactButton:focus {

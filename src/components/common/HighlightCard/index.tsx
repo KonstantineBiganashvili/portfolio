@@ -2,16 +2,17 @@
 
 import React from 'react';
 import styles from './highlightCard.module.css';
+import { LucideIcon } from 'lucide-react';
 
 interface HighlightCardProps {
-	icon: string;
+	icon: LucideIcon;
 	title: string;
 	description: string;
 	className?: string;
 }
 
 function HighlightCard({
-	icon,
+	icon: Icon,
 	title,
 	description,
 	className,
@@ -22,7 +23,9 @@ function HighlightCard({
 
 	return (
 		<div className={cardClasses}>
-			<div className={styles.highlightIcon}>{icon}</div>
+			<div className={styles.highlightIcon}>
+				<Icon size={24} />
+			</div>
 			<div className={styles.highlightContent}>
 				<h4 className={styles.highlightTitle}>{title}</h4>
 				<p className={styles.highlightDescription}>{description}</p>

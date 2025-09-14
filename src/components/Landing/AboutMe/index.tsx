@@ -5,52 +5,11 @@ import styles from './aboutMe.module.css';
 import HighlightCard from '@/components/common/HighlightCard';
 import SkillBadge from '@/components/common/SkillBadge';
 import ProfileAvatar from '@/components/common/ProfileAvatar';
-
-const highlightCards = [
-	{
-		icon: '💻',
-		title: '6 Years in Tech',
-		description: 'Software Engineer with modern web technologies',
-	},
-	{
-		icon: '🚀',
-		title: '3+ Years Next.js/NestJS',
-		description: 'Building scalable applications with Next.js and NestJS',
-	},
-	{
-		icon: '☁️',
-		title: 'Cloud & DevOps',
-		description: 'Extensive experience with AWS and GCP environments',
-	},
-	{
-		icon: '🎓',
-		title: "Dual Master's Degrees",
-		description: 'Computer Science and DevOps Engineering',
-	},
-];
-
-const technicalSkills = [
-	'JavaScript',
-	'TypeScript',
-	'Python',
-	'React',
-	'Next.js',
-	'Node.js',
-	'NestJS',
-	'GraphQL',
-	'Three.js',
-	'GSAP',
-	'PostgreSQL',
-	'MongoDB',
-	'AWS',
-	'GCP',
-	'Docker',
-	'GitHub Actions',
-];
+import { highlightCards, technicalSkills } from '@/constants/aboutMe';
 
 function AboutMe() {
 	return (
-		<div className={styles.aboutMeWrapper}>
+		<div className={styles.aboutMeWrapper} id='aboutMe'>
 			<div className={styles.aboutMeHeader}>
 				<h2 className={styles.aboutMeTitle}>About Me</h2>
 				<p className={styles.aboutMeSubtitle}>
@@ -67,10 +26,10 @@ function AboutMe() {
 					</h3>
 					<div className={styles.profileDescription}>
 						<p>
-							Software Engineer and DevOps Engineer with around 6 years
-							in tech, including 3+ years building applications with Next.js,
-							React and NestJS, and extensive experience managing and building
-							GCP and AWS environments.
+							Software Engineer and DevOps Engineer with around 6 years in tech,
+							including 3+ years building applications with Next.js, React and
+							NestJS, and extensive experience managing and building GCP and AWS
+							environments.
 						</p>
 						<p>
 							I hold master&apos;s degrees in Computer Science and DevOps and
@@ -83,14 +42,17 @@ function AboutMe() {
 				</div>
 
 				<div className={styles.highlightsSection}>
-					{highlightCards.map((card, index) => (
-						<HighlightCard
-							key={index}
-							icon={card.icon}
-							title={card.title}
-							description={card.description}
-						/>
-					))}
+					{highlightCards.map((card, index) => {
+						const IconComponent = card.icon;
+						return (
+							<HighlightCard
+								key={index}
+								icon={IconComponent}
+								title={card.title}
+								description={card.description}
+							/>
+						);
+					})}
 				</div>
 			</div>
 

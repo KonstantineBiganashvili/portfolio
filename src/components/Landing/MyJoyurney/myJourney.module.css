@@ -6,6 +6,7 @@
 	align-items: center;
 	justify-content: center;
 	gap: 40px;
+	padding: 32px 0;
 }
 
 .myJourneyContent {
@@ -29,7 +30,11 @@
 	font-weight: 700;
 	color: var(--theme-primary-text);
 	margin: 0 0 16px 0;
-	background: linear-gradient(135deg, #0f4c75, #2980b9);
+	background: linear-gradient(
+		135deg,
+		var(--theme-primary-text),
+		var(--theme-accent-text)
+	);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	background-clip: text;
@@ -53,7 +58,7 @@
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
 	border-radius: 20px;
-	border: 1px solid rgba(var(--theme-border));
+	border: 1px solid var(--theme-border);
 	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	z-index: 2;
@@ -70,17 +75,17 @@
 }
 
 .myJourneyItem:hover {
-	transform: translateY(-8px) scale(1.02);
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+	transform: translateY(-4px);
+	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
 	border-color: var(--theme-primary);
 }
 
 .myJourneyItemEven:hover {
-	transform: translateY(-8px) scale(1.02);
+	transform: translateY(-4px);
 }
 
 .myJourneyItemOdd:hover {
-	transform: translateY(-8px) scale(1.02);
+	transform: translateY(-4px);
 }
 
 .myJourneyItemNumber {
@@ -177,12 +182,12 @@
 	}
 
 	.myJourneyItem:hover {
-		transform: translateY(-4px) scale(1.01);
+		transform: translateY(-4px);
 	}
 
 	.myJourneyItemEven:hover,
 	.myJourneyItemOdd:hover {
-		transform: translateY(-4px) scale(1.01);
+		transform: translateY(-4px);
 	}
 
 	.myJourneyItemNumber {

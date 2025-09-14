@@ -8,9 +8,11 @@ import MyJourney from './MyJoyurney';
 import Introduction from './Introduction';
 import AboutMe from './AboutMe';
 import RecentWorks from './RecentWorks';
+import ContactMe from './ContactMe';
 
 function Landing() {
 	const { skyboxIntensity } = useSkybox();
+
 	return (
 		<div className={styles.landingWrapper}>
 			<MainCanvas skyboxIntensity={skyboxIntensity} />
@@ -18,6 +20,7 @@ function Landing() {
 			<AboutMe />
 			<RecentWorks />
 			<MyJourney />
+			<ContactMe />
 		</div>
 	);
 }

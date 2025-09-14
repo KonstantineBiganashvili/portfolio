@@ -5,32 +5,23 @@ import styles from './introduction.module.css';
 import BuildingWebsite from '@/components/common/svgs/BuildingWebsite';
 import Badge from '@/components/common/Badge';
 import ContactButton from '@/components/common/ContactButton';
-
-const techBadges: {
-	variant: 'default' | 'secondary' | 'outline';
-	label: string;
-}[] = [
-	{
-		variant: 'default',
-		label: 'TypeScript',
-	},
-	{
-		variant: 'secondary',
-		label: 'Python',
-	},
-	{
-		variant: 'outline',
-		label: 'Cloud',
-	},
-	{
-		variant: 'default',
-		label: 'DevOps',
-	},
-];
+import DownloadResume from '@/components/common/DownloadResume';
+import { Handshake } from 'lucide-react';
+import { techBadges } from '@/constants/introduction';
 
 function Introduction() {
+	const scrollToContact = () => {
+		const contactSection = document.getElementById('contact');
+		if (contactSection) {
+			contactSection.scrollIntoView({
+				behavior: 'smooth',
+				block: 'start',
+			});
+		}
+	};
+
 	return (
-		<div className={styles.introductionWrapper}>
+		<div className={styles.introductionWrapper} id='introduction'>
 			<div className={styles.introductionContent}>
 				<BuildingWebsite className={styles.buildingWebsiteSvg} />
 				<div className={styles.introductionText}>
@@ -51,8 +42,11 @@ function Introduction() {
 					</div>
 					<div className={styles.divider} />
 					<div className={styles.contactButtons}>
-						<ContactButton>Download Resume</ContactButton>
-						<ContactButton>Contact Me</ContactButton>
+						<DownloadResume />
+						<ContactButton onClick={scrollToContact}>
+							<Handshake size={16} />
+							Contact Me
+						</ContactButton>
 					</div>
 				</div>
 			</div>

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { gsap } from 'gsap';
 
@@ -11,11 +11,16 @@ const BuildingWebsite: React.FC<BuildingWebsiteProps> = ({
 }) => {
 	const { theme } = useTheme();
 	const svgRef = useRef<SVGSVGElement>(null);
+	const [mounted, setMounted] = useState(false);
 
-	const skinColor = theme.colors.secondary;
-	const darkColor = theme.colors.primaryText;
-	const accentColor = theme.colors.primary;
-	const lightColor = theme.colors.cardBackground;
+	useEffect(() => {
+		setMounted(true);
+	}, []);
+
+	const skinColor = mounted ? theme.colors.secondary : '#22D3EE';
+	const darkColor = mounted ? theme.colors.primaryText : '#0F172A';
+	const accentColor = mounted ? theme.colors.primary : '#0EA5E9';
+	const lightColor = mounted ? theme.colors.cardBackground : '#FFFFFF';
 
 	useEffect(() => {
 		if (!svgRef.current) return;

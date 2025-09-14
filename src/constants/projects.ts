@@ -1,6 +1,6 @@
 export const projectsData = [
 	{
-		id: 1,
+		id: 'exists-ai',
 		title: 'Exists.ai Landing',
 		shortDescription:
 			'Modern AI-powered landing page showcasing innovative solutions with smooth animations and responsive design.',
@@ -21,7 +21,7 @@ export const projectsData = [
 		},
 	},
 	{
-		id: 2,
+		id: 'app-exists-ai',
 		title: 'App.Exists.ai Platform',
 		shortDescription:
 			'Comprehensive AI application platform with advanced 3D world map representation connected to Unreal Engine, real-time pixel streaming, and content management.',

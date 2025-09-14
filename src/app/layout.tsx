@@ -12,8 +12,69 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
-	title: 'Konstantine Biganashvili',
-	description: 'Portfolio website of Konstantine Biganashvili',
+	title: 'Konstantine Biganashvili - Full Stack Developer',
+	description:
+		'Software Engineer with 6+ years of experience building modern web applications. Specializing in Next.js, NestJS, TypeScript, and cloud technologies (AWS, GCP). Explore my portfolio featuring innovative projects and technical expertise.',
+	keywords: [
+		'Konstantine Biganashvili',
+		'Full Stack Developer',
+		'Software Engineer',
+		'Next.js',
+		'NestJS',
+		'TypeScript',
+		'React',
+		'AWS',
+		'GCP',
+		'Web Developer',
+		'Portfolio',
+		'Three.js',
+		'GSAP',
+		'Cloud Engineer',
+		'DevOps',
+	],
+	authors: [{ name: 'Konstantine Biganashvili' }],
+	creator: 'Konstantine Biganashvili',
+	publisher: 'Konstantine Biganashvili',
+	robots: {
+		index: true,
+		follow: true,
+		googleBot: {
+			index: true,
+			follow: true,
+			'max-video-preview': -1,
+			'max-image-preview': 'large',
+			'max-snippet': -1,
+		},
+	},
+	openGraph: {
+		type: 'website',
+		locale: 'en_US',
+		url: 'https://biganashvili.dev',
+		siteName: 'Konstantine Biganashvili Portfolio',
+		title:
+			'Konstantine Biganashvili - Full Stack Developer & Software Engineer',
+		description:
+			'Experienced Software Engineer with 6+ years in modern web development. Expert in Next.js, NestJS, TypeScript, and cloud technologies. View my portfolio of innovative projects and technical solutions.',
+		images: [
+			{
+				url: '/static/images/preview.png',
+				width: 1200,
+				height: 630,
+				alt: 'Konstantine Biganashvili - Full Stack Developer Portfolio',
+				type: 'image/png',
+			},
+		],
+	},
+	twitter: {
+		card: 'summary_large_image',
+		title: 'Konstantine Biganashvili - Full Stack Developer',
+		description:
+			'Software Engineer with 6+ years of experience. Specializing in Next.js, NestJS, TypeScript, and cloud technologies. Explore my portfolio of innovative projects.',
+		images: ['/static/images/preview.png'],
+	},
+	alternates: {
+		canonical: 'https://biganashvili.dev',
+	},
 	icons: {
 		icon: [
 			{ url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },

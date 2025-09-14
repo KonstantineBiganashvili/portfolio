@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { PopupButton } from 'react-calendly';
+import { PopupModal } from 'react-calendly';
 import DownloadResume from '@/components/common/DownloadResume';
 import styles from './contactInfo.module.css';
 import Link from 'next/link';
@@ -13,6 +13,7 @@ interface ContactInfoProps {
 
 function ContactInfo({ calendlyUrl }: ContactInfoProps) {
 	const [isMounted, setIsMounted] = useState(false);
+	const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
 
 	useEffect(() => {
 		setIsMounted(true);
@@ -29,21 +30,13 @@ function ContactInfo({ calendlyUrl }: ContactInfoProps) {
 					</div>
 					<div className={styles.contactCtaButtons}>
 						{isMounted ? (
-							<div className={styles.calendlyButtonWrapper}>
+							<button
+								className={styles.calendlyButtonWrapper}
+								onClick={() => setIsCalendlyOpen(true)}
+							>
 								<Phone size={16} />
-								<PopupButton
-									url={calendlyUrl}
-									rootElement={
-										document.getElementById('__next') || document.body
-									}
-									text='Schedule a Call'
-									className={styles.calendlyButton}
-									pageSettings={{
-										hideEventTypeDetails: false,
-										hideLandingPageDetails: false,
-									}}
-								/>
-							</div>
+								Schedule a Call
+							</button>
 						) : (
 							<button className={styles.contactScheduleButton} disabled>
 								<Phone size={16} />
@@ -109,6 +102,19 @@ function ContactInfo({ calendlyUrl }: ContactInfoProps) {
 					</div>
 				</div>
 			</div>
+
+			{isMounted && (
+				<PopupModal
+					url={calendlyUrl}
+					onModalClose={() => setIsCalendlyOpen(false)}
+					open={isCalendlyOpen}
+					rootElement={document.getElementById('__next') || document.body}
+					pageSettings={{
+						hideEventTypeDetails: false,
+						hideLandingPageDetails: false,
+					}}
+				/>
+			)}
 		</div>
 	);
 }

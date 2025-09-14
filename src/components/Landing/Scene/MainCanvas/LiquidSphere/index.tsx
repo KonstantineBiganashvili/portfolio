@@ -1,6 +1,6 @@
 import { useRef, useState, useEffect } from 'react';
 import * as THREE from 'three';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import CustomShaderMaterial from 'three-custom-shader-material';
 import vertexShader from '@/shaders/ocean/vertex';
 import fragmentShader from '@/shaders/ocean/fragment';
@@ -24,7 +24,6 @@ const wave2 = {
 
 export default function LiquidSphere() {
 	const { theme } = useTheme();
-	const { viewport } = useThree();
 	const materialRef = useRef<any>(null);
 	const groupRef = useRef<any>(null);
 	const outlineRef = useRef<any>(null);
@@ -34,15 +33,15 @@ export default function LiquidSphere() {
 
 	useEffect(() => {
 		const updatePosition = () => {
-			const width = viewport.width;
+			const width = window.innerWidth;
 
 			let zDistance = -35;
 
-			if (width < 6) {
+			if (width < 480) {
 				zDistance = -55;
-			} else if (width < 10) {
+			} else if (width < 768) {
 				zDistance = -45;
-			} else if (width < 14) {
+			} else if (width < 1024) {
 				zDistance = -40;
 			}
 
@@ -50,7 +49,20 @@ export default function LiquidSphere() {
 		};
 
 		updatePosition();
-	}, [viewport.width]);
+
+		let timeoutId: NodeJS.Timeout;
+		const debouncedResize = () => {
+			clearTimeout(timeoutId);
+			timeoutId = setTimeout(updatePosition, 150);
+		};
+
+		window.addEventListener('resize', debouncedResize);
+
+		return () => {
+			window.removeEventListener('resize', debouncedResize);
+			clearTimeout(timeoutId);
+		};
+	}, []);
 
 	useFrame(({ clock }) => {
 		if (!materialRef.current) return;

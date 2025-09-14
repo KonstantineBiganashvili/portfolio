@@ -20,7 +20,11 @@ function AboutMe() {
 
 			<div className={styles.aboutMeContent}>
 				<div className={styles.profileSection}>
-					<ProfileAvatar initial='K' size='large' />
+					<ProfileAvatar
+						imageSrc='/static/images/konstantine.webp'
+						initial='K'
+						size='large'
+					/>
 					<h3 className={styles.profileTitle}>
 						Software Engineer & <br /> DevOps Engineer
 					</h3>

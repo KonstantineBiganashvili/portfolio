@@ -13,7 +13,11 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
 	metadataBase: new URL('https://biganashvili.dev'),
-	title: 'Konstantine Biganashvili - Full Stack Developer',
+	title: {
+		default:
+			'Konstantine Biganashvili - Full Stack Developer & Software Engineer',
+		template: '%s | Konstantine Biganashvili',
+	},
 	description:
 		'Software Engineer with 6+ years of experience building modern web applications. Specializing in Next.js, NestJS, TypeScript, and cloud technologies (AWS, GCP). Explore my portfolio featuring innovative projects and technical expertise.',
 	keywords: [
@@ -32,10 +36,37 @@ export const metadata: Metadata = {
 		'GSAP',
 		'Cloud Engineer',
 		'DevOps',
+		'JavaScript',
+		'Node.js',
+		'React Developer',
+		'Frontend Developer',
+		'Backend Developer',
+		'Serverless',
+		'Docker',
+		'Kubernetes',
+		'Microservices',
+		'API Development',
+		'Database Design',
+		'System Architecture',
+		'Performance Optimization',
+		'Web Performance',
+		'UI/UX',
+		'Responsive Design',
+		'Progressive Web Apps',
+		'GraphQL',
+		'REST API',
+		'CI/CD',
+		'Infrastructure as Code',
+		'Terraform',
+		'CloudFormation',
 	],
-	authors: [{ name: 'Konstantine Biganashvili' }],
+	authors: [
+		{ name: 'Konstantine Biganashvili', url: 'https://biganashvili.dev' },
+	],
 	creator: 'Konstantine Biganashvili',
 	publisher: 'Konstantine Biganashvili',
+	category: 'Technology',
+	classification: 'Portfolio Website',
 	robots: {
 		index: true,
 		follow: true,
@@ -76,6 +107,18 @@ export const metadata: Metadata = {
 	alternates: {
 		canonical: 'https://biganashvili.dev',
 	},
+	other: {
+		'theme-color': '#2563eb',
+		'color-scheme': 'light dark',
+		'format-detection': 'telephone=no',
+		'mobile-web-app-capable': 'yes',
+		'apple-mobile-web-app-capable': 'yes',
+		'apple-mobile-web-app-status-bar-style': 'default',
+		'apple-mobile-web-app-title': 'K. Biganashvili',
+		'application-name': 'Konstantine Biganashvili Portfolio',
+		'msapplication-TileColor': '#2563eb',
+		'msapplication-config': '/browserconfig.xml',
+	},
 	icons: {
 		icon: [
 			{ url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
@@ -102,6 +145,50 @@ export const metadata: Metadata = {
 	manifest: '/site.webmanifest',
 };
 
+const jsonLd = {
+	'@context': 'https://schema.org',
+	'@type': 'Person',
+	name: 'Konstantine Biganashvili',
+	url: 'https://biganashvili.dev',
+	image: 'https://biganashvili.dev/static/images/konstantine.webp',
+	sameAs: [
+		'https://linkedin.com/in/konstantine-biganashvili',
+		'https://github.com/konstantine-biganashvili',
+	],
+	jobTitle: 'Full Stack Developer',
+	worksFor: {
+		'@type': 'Organization',
+		name: 'Freelance',
+	},
+	alumniOf: {
+		'@type': 'Organization',
+		name: 'University',
+	},
+	knowsAbout: [
+		'Next.js',
+		'React',
+		'TypeScript',
+		'Node.js',
+		'NestJS',
+		'AWS',
+		'GCP',
+		'DevOps',
+		'Three.js',
+		'GSAP',
+		'Full Stack Development',
+		'Software Engineering',
+		'Cloud Computing',
+		'Web Development',
+	],
+	description:
+		'Software Engineer with 6+ years of experience building modern web applications. Specializing in Next.js, NestJS, TypeScript, and cloud technologies.',
+	email: 'mailto:konstantine@biganashvili.dev',
+	address: {
+		'@type': 'PostalAddress',
+		addressCountry: 'Georgia',
+	},
+};
+
 export default function RootLayout({
 	children,
 }: {
@@ -109,6 +196,12 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
+			<head>
+				<script
+					type='application/ld+json'
+					dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+				/>
+			</head>
 			<body className={montserrat.className}>
 				<ThemeProvider>
 					<SkyboxProvider>

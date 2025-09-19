@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Sitemap: https://biganashvili.dev/sitemap.xml
+Crawl-delay: 1
+Allow: /static/
+Allow: /_next/static/
+Disallow: /api/
+Allow: /#introduction
+Allow: /#aboutMe  
+Allow: /#myJourney
+Allow: /#contact

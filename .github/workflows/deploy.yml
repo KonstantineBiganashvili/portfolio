@@ -25,11 +25,15 @@ jobs:
 
       - name: Build image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/$(basename ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
           echo "Image: $IMAGE_NAME"
-          docker build -t $IMAGE_NAME:latest .
+          docker build -t "$IMAGE_NAME:latest" .
 
       - name: Push image
         run: |
-          IMAGE_NAME=ghcr.io/${{ github.repository_owner }}/$(basename ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
-          docker push $IMAGE_NAME:latest
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
+          docker push "$IMAGE_NAME:latest"

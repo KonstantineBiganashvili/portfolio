@@ -9,7 +9,7 @@ permissions:
   packages: write
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,7 @@ jobs:
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
-          echo "Image: $IMAGE_NAME"
+          echo "Building image: $IMAGE_NAME:latest"
           docker build -t "$IMAGE_NAME:latest" .
 
       - name: Push image
@@ -36,4 +36,15 @@ jobs:
           OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
+          echo "Pushing image"
           docker push "$IMAGE_NAME:latest"
+
+      - name: Deploy on Hetzner Server
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HETZNER_HOST }}
+          username: ${{ secrets.HETZNER_USER }}
+          key: ${{ secrets.HETZNER_SSH_KEY_GHCR }}
+          script: |
+            echo "Running deployment script..."
+            /home/ghcr/apps/portfolio/deploy.sh

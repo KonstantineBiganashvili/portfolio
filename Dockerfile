@@ -19,7 +19,8 @@ COPY . .
 
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
-ENV NEXT_PUBLIC_CMS_URL=https://cms.biganashvili.dev
+
+ENV CMS_URL=http://localhost:8055
 ENV CMS_API_KEY=dummy-api-key
 
 RUN npm run build

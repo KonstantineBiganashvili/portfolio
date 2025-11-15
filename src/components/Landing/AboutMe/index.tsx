@@ -19,9 +19,13 @@ const Icons = {
 function AboutMe() {
 	const {
 		pageData: { about },
+		cmsUrl,
 	} = usePortfolio();
 
-	const profilePicturePath = buildCmsUrl(about.profile_photo.filename_disk);
+	const profilePicturePath = buildCmsUrl(
+		about.profile_photo.filename_disk,
+		cmsUrl,
+	);
 
 	return (
 		<div className={styles.aboutMeWrapper} id='aboutMe'>

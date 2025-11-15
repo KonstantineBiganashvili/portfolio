@@ -4,7 +4,7 @@ import type { CMSPortfolioData } from '@/types/cms';
 
 export const getPortfolio = async (): Promise<CMSPortfolioData[] | null> => {
 	try {
-		const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
+		const cmsUrl = process.env.CMS_URL;
 		if (!cmsUrl || cmsUrl === 'http://localhost:8055') {
 			return null;
 		}

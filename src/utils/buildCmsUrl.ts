@@ -1,7 +1,6 @@
-const buildCmsUrl = (path: string) => {
-	return `${
-		process.env.NEXT_PUBLIC_CMS_URL ?? 'http://localhost:8055'
-	}/assets/${path}`;
+const buildCmsUrl = (path: string, cmsUrl?: string) => {
+	const baseUrl = cmsUrl ?? 'http://localhost:8055';
+	return `${baseUrl}/assets/${path}`;
 };
 
 export default buildCmsUrl;

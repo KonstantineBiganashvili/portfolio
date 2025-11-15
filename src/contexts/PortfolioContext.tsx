@@ -5,6 +5,7 @@ import type { PageData } from '@/types/portfolio';
 
 interface PortfolioContextType {
 	pageData: PageData;
+	cmsUrl: string;
 }
 
 const PortfolioContext = createContext<PortfolioContextType | undefined>(
@@ -14,12 +15,14 @@ const PortfolioContext = createContext<PortfolioContextType | undefined>(
 export function PortfolioProvider({
 	children,
 	pageData,
+	cmsUrl,
 }: {
 	children: ReactNode;
 	pageData: PageData;
+	cmsUrl: string;
 }) {
 	return (
-		<PortfolioContext.Provider value={{ pageData }}>
+		<PortfolioContext.Provider value={{ pageData, cmsUrl }}>
 			{children}
 		</PortfolioContext.Provider>
 	);

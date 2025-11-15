@@ -199,7 +199,7 @@ let portfolioData = await getPortfolio();
 let pageData: PageData;
 
 if (!portfolioData || portfolioData.length === 0) {
-	const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
+	const cmsUrl = process.env.CMS_URL;
 	if (!cmsUrl || cmsUrl === 'http://localhost:8055') {
 		portfolioData = null;
 		pageData = {
@@ -292,6 +292,8 @@ if (!portfolioData || portfolioData.length === 0) {
 	pageData = getPageData(portfolioData[0]);
 }
 
+const cmsUrl = process.env.CMS_URL ?? 'http://localhost:8055';
+
 export default function RootLayout({
 	children,
 }: {
@@ -308,7 +310,7 @@ export default function RootLayout({
 			<body className={montserrat.className}>
 				<ThemeProvider>
 					<SkyboxProvider>
-						<PortfolioProvider pageData={pageData}>
+						<PortfolioProvider pageData={pageData} cmsUrl={cmsUrl}>
 							<AppShell>{children}</AppShell>
 						</PortfolioProvider>
 					</SkyboxProvider>

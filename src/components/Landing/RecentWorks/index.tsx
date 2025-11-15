@@ -11,6 +11,7 @@ import buildCmsUrl from '@/utils/buildCmsUrl';
 function RecentWorks() {
 	const {
 		pageData: { recentWorks },
+		cmsUrl,
 	} = usePortfolio();
 
 	return (
@@ -25,7 +26,7 @@ function RecentWorks() {
 					<div key={project.id} className={styles.projectCard}>
 						<div className={styles.projectImage}>
 							<Image
-								src={buildCmsUrl(project.thumbnail)}
+								src={buildCmsUrl(project.thumbnail, cmsUrl)}
 								alt={`${project.title} preview`}
 								fill
 								className={styles.projectImageElement}

@@ -293,6 +293,8 @@ if (!portfolioData || portfolioData.length === 0) {
 }
 
 const cmsUrl = process.env.CMS_URL ?? 'http://localhost:8055';
+const contactEmail =
+	process.env.ACTIONFORM_STRING ?? 'konstantine@biganashvili.dev';
 
 export default function RootLayout({
 	children,
@@ -310,7 +312,11 @@ export default function RootLayout({
 			<body className={montserrat.className}>
 				<ThemeProvider>
 					<SkyboxProvider>
-						<PortfolioProvider pageData={pageData} cmsUrl={cmsUrl}>
+						<PortfolioProvider
+							pageData={pageData}
+							cmsUrl={cmsUrl}
+							contactEmail={contactEmail}
+						>
 							<AppShell>{children}</AppShell>
 						</PortfolioProvider>
 					</SkyboxProvider>

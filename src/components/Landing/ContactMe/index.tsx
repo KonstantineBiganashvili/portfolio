@@ -13,6 +13,7 @@ function ContactMe() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const {
 		pageData: { contact },
+		contactEmail,
 	} = usePortfolio();
 
 	const [toast, setToast] = useState({
@@ -40,27 +41,21 @@ function ContactMe() {
 		setIsSubmitting(true);
 
 		try {
-			const response = await fetch(
-				`https://formsubmit.co/${
-					process.env.NEXT_PUBLIC_ACTIONFORM_STRING ??
-					'konstantine@biganashvili.dev'
-				}`,
-				{
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({
-						name: formData.name,
-						email: formData.email,
-						subject: formData.subject,
-						message: formData.message,
-						_subject: `New message from ${formData.name}: ${formData.subject}`,
-						_captcha: 'false',
-						_template: 'table',
-					}),
+			const response = await fetch(`https://formsubmit.co/${contactEmail}`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
 				},
-			);
+				body: JSON.stringify({
+					name: formData.name,
+					email: formData.email,
+					subject: formData.subject,
+					message: formData.message,
+					_subject: `New message from ${formData.name}: ${formData.subject}`,
+					_captcha: 'false',
+					_template: 'table',
+				}),
+			});
 
 			if (response.ok) {
 				showToast(

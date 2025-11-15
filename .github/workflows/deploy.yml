@@ -42,11 +42,13 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
           REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          PACKAGE_NAME="${OWNER}/${REPO}"
 
-          echo "Setting GHCR package visibility to public for: $REPO"
+          echo "Setting GHCR package visibility to public for: $PACKAGE_NAME"
 
           gh api \
             -X PATCH \
-            /user/packages/container/$REPO/visibility \
+            /user/packages/container/$PACKAGE_NAME/visibility \
             -f visibility=public

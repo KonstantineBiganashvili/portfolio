@@ -13,7 +13,8 @@ function ContactMe() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const {
 		pageData: { contact },
-		contactEmail,
+		web3FormApiUrl,
+		web3FormApiKey,
 	} = usePortfolio();
 
 	const [toast, setToast] = useState({
@@ -41,29 +42,29 @@ function ContactMe() {
 		setIsSubmitting(true);
 
 		try {
-			const response = await fetch(`https://formsubmit.co/${contactEmail}`, {
+			const response = await fetch(web3FormApiUrl, {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 				body: JSON.stringify({
+					access_key: web3FormApiKey,
 					name: formData.name,
 					email: formData.email,
 					subject: formData.subject,
 					message: formData.message,
-					_subject: `New message from ${formData.name}: ${formData.subject}`,
-					_captcha: 'false',
-					_template: 'table',
 				}),
 			});
 
-			if (response.ok) {
+			const data = await response.json();
+
+			if (response.ok && data.success) {
 				showToast(
 					"Message sent successfully! I'll get back to you soon.",
 					'success',
 				);
 			} else {
-				throw new Error('Failed to send message');
+				throw new Error(data.message || 'Failed to send message');
 			}
 		} catch (error) {
 			console.error('Error sending message:', error);

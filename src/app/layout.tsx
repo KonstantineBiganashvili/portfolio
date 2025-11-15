@@ -293,8 +293,9 @@ if (!portfolioData || portfolioData.length === 0) {
 }
 
 const cmsUrl = process.env.CMS_URL ?? 'http://localhost:8055';
-const contactEmail =
-	process.env.ACTIONFORM_STRING ?? 'konstantine@biganashvili.dev';
+const web3FormApiUrl =
+	process.env.WEB3_FORM_API_URL ?? 'https://api.web3forms.com/submit';
+const web3FormApiKey = process.env.WEB3_FORM_API_KEY ?? '';
 
 export default function RootLayout({
 	children,
@@ -315,7 +316,8 @@ export default function RootLayout({
 						<PortfolioProvider
 							pageData={pageData}
 							cmsUrl={cmsUrl}
-							contactEmail={contactEmail}
+							web3FormApiUrl={web3FormApiUrl}
+							web3FormApiKey={web3FormApiKey}
 						>
 							<AppShell>{children}</AppShell>
 						</PortfolioProvider>

@@ -41,7 +41,10 @@ function ContactMe() {
 
 		try {
 			const response = await fetch(
-				`https://formsubmit.co/${process.env.NEXT_PUBLIC_ACTIONFORM_STRING}`,
+				`https://formsubmit.co/${
+					process.env.NEXT_PUBLIC_ACTIONFORM_STRING ??
+					'konstantine@biganashvili.dev'
+				}`,
 				{
 					method: 'POST',
 					headers: {

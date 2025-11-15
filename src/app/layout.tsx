@@ -8,6 +8,7 @@ import { SkyboxProvider } from '@/contexts/SkyboxContext';
 import { PortfolioProvider } from '@/contexts/PortfolioContext';
 import { getPortfolio } from '@/libs/directus/queries/getPortfolio';
 import getPageData from '@/utils/getPageData';
+import type { PageData } from '@/types/portfolio';
 
 const montserrat = Montserrat({
 	subsets: ['latin'],
@@ -192,8 +193,104 @@ const jsonLd = {
 	},
 };
 
-const portfolioData = await getPortfolio();
-const pageData = getPageData(portfolioData[0]);
+export const dynamic = 'force-dynamic';
+
+let portfolioData = await getPortfolio();
+let pageData: PageData;
+
+if (!portfolioData || portfolioData.length === 0) {
+	const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
+	if (!cmsUrl || cmsUrl === 'http://localhost:8055') {
+		portfolioData = null;
+		pageData = {
+			header: { navigation: [], socials: [] },
+			hero: {
+				id: '',
+				title: '',
+				page_title: '',
+				subtext: '',
+				subtext_2: '',
+				skills: [],
+				download_btn_title: '',
+				download_btn_file: { filename_disk: '' },
+				contact_btn_title: '',
+				contact_btn_path: '',
+			},
+			about: {
+				id: '',
+				title: '',
+				page_title: '',
+				subtext: '',
+				profile_photo: { filename_disk: '' },
+				position: '',
+				description_1: '',
+				description_2: '',
+				highlights: [],
+				skills_title: '',
+				skills: [],
+			},
+			recentWorks: {
+				id: '',
+				title: '',
+				page_title: '',
+				subtext: '',
+				card_view_title: '',
+				card_live_title: '',
+				additional_info: '',
+				projects: [],
+			},
+			myJourney: {
+				id: '',
+				title: '',
+				page_title: '',
+				subtext: '',
+				journey_items: [],
+			},
+			contact: {
+				id: '',
+				title: '',
+				page_title: '',
+				subtext: '',
+				form_title: '',
+				form_subtext: '',
+				form_name_title: '',
+				form_name_placeholder: '',
+				form_email_title: '',
+				form_email_placeholder: '',
+				form_subject_title: '',
+				form_subject_placeholder: '',
+				form_message_title: '',
+				form_message_placeholder: '',
+				form_btn_text: '',
+				form_btn_loading_text: '',
+				contact_box_title: '',
+				contact_box_call_btn_title: '',
+				contact_box_resume_btn_title: '',
+				contact_box_resume_btn_file: '',
+				get_in_touch_title: '',
+				availability_title: '',
+				availability_subtext: '',
+				availability_items: [],
+				location_title: '',
+				location: '',
+			},
+			footer: {
+				id: '',
+				title: '',
+				footer_subtext: '',
+				btt_btn_title: '',
+				availability_text: '',
+				location: '',
+				navigation: [],
+				socials: [],
+			},
+		} as PageData;
+	} else {
+		throw new Error('Failed to fetch portfolio data');
+	}
+} else {
+	pageData = getPageData(portfolioData[0]);
+}
 
 export default function RootLayout({
 	children,

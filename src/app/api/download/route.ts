@@ -12,7 +12,9 @@ export async function GET(request: NextRequest) {
 			);
 		}
 
-		const assetUrl = `${process.env.NEXT_PUBLIC_CMS_URL}/assets/${path}`;
+		const assetUrl = `${
+			process.env.NEXT_PUBLIC_CMS_URL ?? 'http://localhost:8055'
+		}/assets/${path}`;
 
 		const response = await fetch(assetUrl);
 

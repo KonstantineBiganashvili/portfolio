@@ -1,7 +1,7 @@
 import type { NextConfig } from 'next';
 
 const getCmsHostname = (): string | undefined => {
-	const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
+	const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL ?? 'http://localhost:8055';
 	if (!cmsUrl) return undefined;
 	try {
 		const url = new URL(cmsUrl);
@@ -14,6 +14,7 @@ const getCmsHostname = (): string | undefined => {
 const cmsHostname = getCmsHostname();
 
 const nextConfig: NextConfig = {
+	output: 'standalone',
 	experimental: {
 		optimizePackageImports: ['lucide-react'],
 	},

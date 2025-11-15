@@ -37,25 +37,3 @@ jobs:
           REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
           docker push "$IMAGE_NAME:latest"
-
-      - name: Make package public
-        env:
-          GH_TOKEN: ${{ secrets.GHCR_TOKEN }}
-        run: |
-          OWNER="${{ github.repository_owner }}"
-          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-
-          echo "Setting GHCR package visibility to public: $OWNER / $REPO"
-
-          sleep 5
-
-          if ! gh api -X PATCH "/users/$OWNER/packages/container/$REPO" -f visibility=public 2>/dev/null; then
-            echo "User endpoint failed, trying organization endpoint..."
-            gh api -X PATCH "/orgs/$OWNER/packages/container/$REPO" -f visibility=public || {
-              echo "Warning: Could not set package visibility automatically. Please set it manually in GitHub."
-              echo "This is not a critical error - continuing workflow."
-              exit 0
-            }
-          fi
-
-          echo "Package visibility set to public successfully!"

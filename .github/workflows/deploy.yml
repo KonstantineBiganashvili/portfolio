@@ -37,3 +37,16 @@ jobs:
           REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
           IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
           docker push "$IMAGE_NAME:latest"
+
+      - name: Make package public
+        run: |
+          OWNER="${{ github.repository_owner }}"
+          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+
+          echo "Setting GHCR package visibility to public: $OWNER / $REPO"
+
+          gh api \
+            -X PATCH \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            /users/$OWNER/packages/container/$REPO \
+            -f visibility=public

@@ -47,7 +47,15 @@ jobs:
 
           echo "Setting GHCR package visibility to public: $OWNER / $REPO"
 
-          gh api \
-            -X PATCH \
-            /users/$OWNER/packages/container/$REPO/visibility \
-            -f visibility=public
+          sleep 5
+
+          if ! gh api -X PATCH "/users/$OWNER/packages/container/$REPO" -f visibility=public 2>/dev/null; then
+            echo "User endpoint failed, trying organization endpoint..."
+            gh api -X PATCH "/orgs/$OWNER/packages/container/$REPO" -f visibility=public || {
+              echo "Warning: Could not set package visibility automatically. Please set it manually in GitHub."
+              echo "This is not a critical error - continuing workflow."
+              exit 0
+            }
+          fi
+
+          echo "Package visibility set to public successfully!"

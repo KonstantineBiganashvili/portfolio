@@ -6,22 +6,7 @@ import Badge from '@/components/common/Badge';
 import Link from 'next/link';
 import styles from './projectModal.module.css';
 import { ExternalLink } from 'lucide-react';
-
-interface ProjectData {
-	id: string;
-	title: string;
-	shortDescription: string;
-	fullDescription: string;
-	technologies: string[];
-	infrastructure: string;
-	status: string;
-	liveUrl: string;
-	details: {
-		frontend: string;
-		backend: string;
-		devops: string;
-	};
-}
+import type { ProjectData } from '@/types/portfolio';
 
 interface ProjectModalProps {
 	project: ProjectData | null;
@@ -34,10 +19,12 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 		<Modal isOpen={isOpen} onClose={onClose} title={project?.title || ''}>
 			{project && (
 				<>
-					<p className={styles.modalDescription}>{project.fullDescription}</p>
+					<p className={styles.modalDescription}>{project.long_description}</p>
 
 					<div className={styles.modalSection}>
-						<h4 className={styles.modalSectionTitle}>Technologies Used</h4>
+						<h4 className={styles.modalSectionTitle}>
+							{project.technologies_title}
+						</h4>
 						<div className={styles.modalTechnologies}>
 							{project.technologies.map((tech, index) => (
 								<Badge key={index} variant='outline'>
@@ -48,36 +35,18 @@ function ProjectModal({ project, isOpen, onClose }: ProjectModalProps) {
 					</div>
 
 					<div className={styles.modalSection}>
-						<h4 className={styles.modalSectionTitle}>Infrastructure</h4>
-						<p className={styles.modalInfrastructure}>
-							{project.infrastructure}
-						</p>
-					</div>
-
-					<div className={styles.modalSection}>
 						<h4 className={styles.modalSectionTitle}>Technical Details</h4>
-
-						<div className={styles.modalDetails}>
-							<div className={styles.modalDetailItem}>
-								<h5>Frontend Development</h5>
-								<p>{project.details.frontend}</p>
+						{project.technical_details.map((detail) => (
+							<div key={detail.title} className={styles.modalDetailItem}>
+								<h5>{detail.title}</h5>
+								<p>{detail.description}</p>
 							</div>
-
-							<div className={styles.modalDetailItem}>
-								<h5>Backend & Infrastructure</h5>
-								<p>{project.details.backend}</p>
-							</div>
-
-							<div className={styles.modalDetailItem}>
-								<h5>DevOps & Deployment</h5>
-								<p>{project.details.devops}</p>
-							</div>
-						</div>
+						))}
 					</div>
 
 					<div className={styles.modalFooter}>
 						<Link
-							href={project.liveUrl}
+							href={project.live_url}
 							target='_blank'
 							rel='noopener noreferrer'
 							className={styles.modalActionButton}

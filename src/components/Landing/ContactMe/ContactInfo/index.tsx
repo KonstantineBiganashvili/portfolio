@@ -1,23 +1,35 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { PopupModal } from 'react-calendly';
 import DownloadResume from '@/components/common/DownloadResume';
 import styles from './contactInfo.module.css';
 import Link from 'next/link';
 import { Github, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
+import { usePortfolio } from '@/contexts/PortfolioContext';
+
+const icons = {
+	GitHub: Github,
+	Linkedin: Linkedin,
+};
 
 interface ContactInfoProps {
 	calendlyUrl: string;
 }
 
 function ContactInfo({ calendlyUrl }: ContactInfoProps) {
-	const [isMounted, setIsMounted] = useState(false);
 	const [isCalendlyOpen, setIsCalendlyOpen] = useState(false);
 
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
+	const {
+		pageData: {
+			contact,
+			hero: { download_btn_file },
+			header: { socials },
+		},
+	} = usePortfolio();
+
+	const mail = socials.find((social) => social.label === 'Mail');
+	const contactSocials = socials.filter((social) => social.label !== 'Mail');
 
 	return (
 		<div className={styles.contactInfoWrapper}>
@@ -25,54 +37,53 @@ function ContactInfo({ calendlyUrl }: ContactInfoProps) {
 				<div className={styles.contactCtaSection}>
 					<div className={styles.contactCtaContent}>
 						<h2 className={styles.contactCtaTitle}>
-							Ready to Start Something Amazing?
+							{contact.contact_box_title}
 						</h2>
 					</div>
 					<div className={styles.contactCtaButtons}>
-						{isMounted ? (
-							<button
-								className={styles.calendlyButtonWrapper}
-								onClick={() => setIsCalendlyOpen(true)}
-							>
-								<Phone size={16} />
-								Schedule a Call
-							</button>
-						) : (
-							<button className={styles.contactScheduleButton} disabled>
-								<Phone size={16} />
-								Schedule a Call
-							</button>
-						)}
-						<DownloadResume className={styles.contactResumeButton} />
+						<button
+							className={styles.calendlyButtonWrapper}
+							onClick={() => setIsCalendlyOpen(true)}
+						>
+							<Phone size={16} />
+							{contact.contact_box_call_btn_title}
+						</button>
+						<DownloadResume
+							className={styles.contactResumeButton}
+							path={download_btn_file.filename_disk}
+						>
+							{contact.contact_box_resume_btn_title}
+						</DownloadResume>
 					</div>
 				</div>
 			</div>
 
 			<div className={styles.contactInfo}>
-				<h3 className={styles.infoTitle}>Get in Touch</h3>
+				<h3 className={styles.infoTitle}>{contact.get_in_touch_title}</h3>
 				<div className={styles.contactDetails}>
-					<div className={styles.contactItem}>
-						<div className={styles.contactIcon}>
-							<Mail size={24} />
+					{mail && (
+						<div className={styles.contactItem}>
+							<div className={styles.contactIcon}>
+								<Mail size={24} />
+							</div>
+							<div className={styles.contactContent}>
+								<span className={styles.contactLabel}>{mail.label}</span>
+								<Link href={mail.path} className={styles.contactValue}>
+									{mail.path.split(':')[1]}
+								</Link>
+							</div>
 						</div>
-						<div className={styles.contactContent}>
-							<span className={styles.contactLabel}>Email</span>
-							<Link
-								href='mailto:contact@biganashvili.dev'
-								className={styles.contactValue}
-							>
-								contact@biganashvili.dev
-							</Link>
-						</div>
-					</div>
+					)}
 
 					<div className={styles.contactItem}>
 						<div className={styles.contactIcon}>
 							<MapPin size={24} />
 						</div>
 						<div className={styles.contactContent}>
-							<span className={styles.contactLabel}>Location</span>
-							<span className={styles.contactValue}>Tbilisi, Georgia</span>
+							<span className={styles.contactLabel}>
+								{contact.location_title}
+							</span>
+							<span className={styles.contactValue}>{contact.location}</span>
 						</div>
 					</div>
 				</div>
@@ -81,29 +92,27 @@ function ContactInfo({ calendlyUrl }: ContactInfoProps) {
 				<div className={styles.socialSection}>
 					<h4 className={styles.socialTitle}>Follow Me</h4>
 					<div className={styles.socialLinks}>
-						<Link
-							href='https://github.com/KonstantineBiganashvili'
-							target='_blank'
-							rel='noopener noreferrer'
-							className={styles.socialLink}
-							title='GitHub'
-						>
-							<Github size={24} />
-						</Link>
-						<Link
-							href='https://www.linkedin.com/in/konstantine-biganashvili-553a20246/'
-							target='_blank'
-							rel='noopener noreferrer'
-							className={styles.socialLink}
-							title='LinkedIn'
-						>
-							<Linkedin size={24} />
-						</Link>
+						{contactSocials.map((social) => {
+							const IconComponent = icons[social.icon as keyof typeof icons];
+
+							return (
+								<Link
+									key={social.label}
+									href={social.path}
+									target='_blank'
+									rel='noopener noreferrer'
+									className={styles.socialLink}
+									title={social.label}
+								>
+									<IconComponent size={24} />
+								</Link>
+							);
+						})}
 					</div>
 				</div>
 			</div>
 
-			{isMounted && (
+			{isCalendlyOpen && (
 				<PopupModal
 					url={calendlyUrl}
 					onModalClose={() => setIsCalendlyOpen(false)}

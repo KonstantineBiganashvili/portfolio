@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useTheme } from '@/contexts/ThemeContext';
 import { gsap } from 'gsap';
 
@@ -11,16 +11,11 @@ const BuildingWebsite: React.FC<BuildingWebsiteProps> = ({
 }) => {
 	const { theme } = useTheme();
 	const svgRef = useRef<SVGSVGElement>(null);
-	const [mounted, setMounted] = useState(false);
 
-	useEffect(() => {
-		setMounted(true);
-	}, []);
-
-	const skinColor = mounted ? theme.colors.secondary : '#22D3EE';
-	const darkColor = mounted ? theme.colors.primaryText : '#0F172A';
-	const accentColor = mounted ? theme.colors.primary : '#0EA5E9';
-	const lightColor = mounted ? theme.colors.cardBackground : '#FFFFFF';
+	const skinColor = theme.colors.secondary;
+	const darkColor = theme.colors.primaryText;
+	const accentColor = theme.colors.primary;
+	const lightColor = theme.colors.cardBackground;
 
 	useEffect(() => {
 		if (!svgRef.current) return;
@@ -176,6 +171,7 @@ const BuildingWebsite: React.FC<BuildingWebsiteProps> = ({
 			xmlnsXlink='http://www.w3.org/1999/xlink'
 			role='img'
 			className={className}
+			suppressHydrationWarning
 		>
 			<path
 				d='M463.61382,139.78498c-15.16108-52.71309-70.1841-83.15508-122.89755-67.9939-52.71345,15.16118-83.15544,70.1842-67.99436,122.89729,12.29564,42.75033,50.8103,70.84705,93.04717,71.85558l17.52764,7.37261-24.84004,92.23421,128.09716,24.13425,52.06041-134s-75.56859,1.41544-94.8601-24.63533c20.84-24.5008,29.41663-58.63637,19.85966-91.86471Z'

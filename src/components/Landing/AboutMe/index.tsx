@@ -5,49 +5,49 @@ import styles from './aboutMe.module.css';
 import HighlightCard from '@/components/common/HighlightCard';
 import SkillBadge from '@/components/common/SkillBadge';
 import ProfileAvatar from '@/components/common/ProfileAvatar';
-import { highlightCards, technicalSkills } from '@/constants/aboutMe';
+import { usePortfolio } from '@/contexts/PortfolioContext';
+import buildCmsUrl from '@/utils/buildCmsUrl';
+import { Cloud, GraduationCap, Laptop, Rocket } from 'lucide-react';
+
+const Icons = {
+	Laptop: Laptop,
+	Rocket: Rocket,
+	Cloud: Cloud,
+	GraduationCap: GraduationCap,
+};
 
 function AboutMe() {
+	const {
+		pageData: { about },
+	} = usePortfolio();
+
+	const profilePicturePath = buildCmsUrl(about.profile_photo.filename_disk);
+
 	return (
 		<div className={styles.aboutMeWrapper} id='aboutMe'>
 			<div className={styles.aboutMeHeader}>
-				<h2 className={styles.aboutMeTitle}>About Me</h2>
-				<p className={styles.aboutMeSubtitle}>
-					Transforming ideas into exceptional digital experiences through code,
-					creativity, and cutting-edge technology
-				</p>
+				<h2 className={styles.aboutMeTitle}>{about.page_title}</h2>
+				<p className={styles.aboutMeSubtitle}>{about.subtext}</p>
 			</div>
 
 			<div className={styles.aboutMeContent}>
 				<div className={styles.profileSection}>
 					<ProfileAvatar
-						imageSrc='/static/images/konstantine.webp'
+						imageSrc={profilePicturePath}
 						initial='K'
 						size='large'
 					/>
-					<h3 className={styles.profileTitle}>
-						Software Engineer & <br /> DevOps Engineer
-					</h3>
+					<h3 className={styles.profileTitle}>{about.position}</h3>
 					<div className={styles.profileDescription}>
-						<p>
-							Software Engineer and DevOps Engineer with around 6 years in tech,
-							including 3+ years building applications with Next.js, React and
-							NestJS, and extensive experience managing and building GCP and AWS
-							environments.
-						</p>
-						<p>
-							I hold master&apos;s degrees in Computer Science and DevOps and
-							excel at delivering scalable, innovative solutions. I&apos;m
-							passionate about bridging the gap between design and
-							functionality, creating applications that are both visually
-							stunning and highly performant.
-						</p>
+						<p>{about.description_1}</p>
+						<p>{about.description_2}</p>
 					</div>
 				</div>
 
 				<div className={styles.highlightsSection}>
-					{highlightCards.map((card, index) => {
-						const IconComponent = card.icon;
+					{about.highlights.map((card, index) => {
+						const IconComponent = Icons[card.icon];
+
 						return (
 							<HighlightCard
 								key={index}
@@ -61,9 +61,9 @@ function AboutMe() {
 			</div>
 
 			<div className={styles.skillsSection}>
-				<h4 className={styles.skillsTitle}>Technical Skills</h4>
+				<h4 className={styles.skillsTitle}>{about.skills_title}</h4>
 				<div className={styles.skillsGrid}>
-					{technicalSkills.map((skill, index) => (
+					{about.skills.map((skill, index) => (
 						<SkillBadge key={index}>{skill}</SkillBadge>
 					))}
 				</div>

@@ -1,12 +1,6 @@
 'use client';
 
-import React, {
-	createContext,
-	useContext,
-	useState,
-	useEffect,
-	ReactNode,
-} from 'react';
+import React, { createContext, useContext, useMemo, ReactNode } from 'react';
 import { useTheme } from './ThemeContext';
 
 interface SkyboxContextType {
@@ -17,13 +11,9 @@ const SkyboxContext = createContext<SkyboxContextType | undefined>(undefined);
 
 export function SkyboxProvider({ children }: { children: ReactNode }) {
 	const { theme } = useTheme();
-	const [skyboxIntensity, setSkyboxIntensity] = useState(() => {
-		return theme.mode === 'light' ? 1 : 0.1;
-	});
 
-	useEffect(() => {
-		const newIntensity = theme.mode === 'light' ? 1 : 0.1;
-		setSkyboxIntensity(newIntensity);
+	const skyboxIntensity = useMemo(() => {
+		return theme.mode === 'light' ? 1 : 0.1;
 	}, [theme.mode]);
 
 	return (

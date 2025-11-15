@@ -1,30 +1,31 @@
 'use client';
 
-import React from 'react';
 import Image from 'next/image';
 import styles from './recentWorks.module.css';
 import Badge from '@/components/common/Badge';
 import Link from 'next/link';
 import { ExternalLink, Eye, LinkIcon } from 'lucide-react';
-import { projectsData } from '@/constants/projects';
+import { usePortfolio } from '@/contexts/PortfolioContext';
+import buildCmsUrl from '@/utils/buildCmsUrl';
 
 function RecentWorks() {
+	const {
+		pageData: { recentWorks },
+	} = usePortfolio();
+
 	return (
 		<div className={styles.recentWorksWrapper} id='recentWorks'>
 			<div className={styles.recentWorksHeader}>
-				<h2 className={styles.recentWorksTitle}>Recent Works</h2>
-				<p className={styles.recentWorksSubtitle}>
-					Professional projects showcasing full-stack development and cloud
-					infrastructure expertise
-				</p>
+				<h2 className={styles.recentWorksTitle}>{recentWorks.page_title}</h2>
+				<p className={styles.recentWorksSubtitle}>{recentWorks.subtext}</p>
 			</div>
 
 			<div className={styles.projectsGrid}>
-				{projectsData.map((project) => (
+				{recentWorks.projects.map((project) => (
 					<div key={project.id} className={styles.projectCard}>
 						<div className={styles.projectImage}>
 							<Image
-								src={project.image}
+								src={buildCmsUrl(project.thumbnail)}
 								alt={`${project.title} preview`}
 								fill
 								className={styles.projectImageElement}
@@ -33,7 +34,7 @@ function RecentWorks() {
 							/>
 							<div className={styles.projectImageOverlay}>
 								<Link
-									href={project.liveUrl}
+									href={project.live_url}
 									target='_blank'
 									rel='noopener noreferrer'
 									className={styles.overlayContent}
@@ -53,7 +54,7 @@ function RecentWorks() {
 						<div className={styles.projectContent}>
 							<h4 className={styles.projectTitle}>{project.title}</h4>
 							<p className={styles.projectDescription}>
-								{project.shortDescription}
+								{project.short_description}
 							</p>
 							<div className={styles.projectTechnologies}>
 								{project.technologies.slice(0, 4).map((tech, index) => (
@@ -69,16 +70,16 @@ function RecentWorks() {
 									className={styles.actionButton}
 								>
 									<Eye size={16} />
-									View Details
+									{recentWorks.card_view_title}
 								</Link>
 								<a
-									href={project.liveUrl}
+									href={project.live_url}
 									target='_blank'
 									rel='noopener noreferrer'
 									className={styles.actionButtonSecondary}
 								>
 									<ExternalLink size={16} />
-									Visit Site
+									{recentWorks.card_live_title}
 								</a>
 							</div>
 						</div>
@@ -87,13 +88,7 @@ function RecentWorks() {
 			</div>
 
 			<div className={styles.explanation}>
-				<p>
-					Both projects were developed for <strong>Exists</strong>, where I was
-					responsible for the complete infrastructure setup on AWS and GCP,
-					full-stack development, and deployment automation. The projects
-					demonstrate expertise in modern web technologies, 3D graphics,
-					real-time systems, and cloud architecture.
-				</p>
+				<p dangerouslySetInnerHTML={{ __html: recentWorks.additional_info }} />
 			</div>
 		</div>
 	);

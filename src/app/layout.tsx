@@ -5,6 +5,9 @@ import '@/styles/theme.css';
 import AppShell from '@/components/AppShell';
 import { ThemeProvider } from '@/contexts/ThemeContext';
 import { SkyboxProvider } from '@/contexts/SkyboxContext';
+import { PortfolioProvider } from '@/contexts/PortfolioContext';
+import { getPortfolio } from '@/libs/directus/queries/getPortfolio';
+import getPageData from '@/utils/getPageData';
 
 const montserrat = Montserrat({
 	subsets: ['latin'],
@@ -189,6 +192,9 @@ const jsonLd = {
 	},
 };
 
+const portfolioData = await getPortfolio();
+const pageData = getPageData(portfolioData[0]);
+
 export default function RootLayout({
 	children,
 }: {
@@ -205,7 +211,9 @@ export default function RootLayout({
 			<body className={montserrat.className}>
 				<ThemeProvider>
 					<SkyboxProvider>
-						<AppShell>{children}</AppShell>
+						<PortfolioProvider pageData={pageData}>
+							<AppShell>{children}</AppShell>
+						</PortfolioProvider>
 					</SkyboxProvider>
 				</ThemeProvider>
 			</body>

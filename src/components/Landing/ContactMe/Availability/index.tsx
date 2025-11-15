@@ -1,38 +1,32 @@
 'use client';
 
-import React from 'react';
 import styles from './availability.module.css';
-import {
-	AvailabilityItem,
-	defaultAvailability,
-} from '@/constants/availability';
+import { usePortfolio } from '@/contexts/PortfolioContext';
 
-interface AvailabilityProps {
-	availabilityItems?: AvailabilityItem[];
-}
-
-function Availability({ availabilityItems }: AvailabilityProps) {
-	const items = availabilityItems || defaultAvailability;
+function Availability() {
+	const {
+		pageData: { contact },
+	} = usePortfolio();
 
 	return (
 		<div className={styles.availability}>
 			<div className={styles.availabilityCard}>
 				<h3 className={styles.availabilityTitle}>
-					Available for New Opportunities
+					{contact.availability_title}
 				</h3>
 				<p className={styles.availabilityDescription}>
-					Currently open to the following types of work:
+					{contact.availability_subtext}
 				</p>
 				<div className={styles.availabilityList}>
-					{items.map((item) => (
+					{contact.availability_items.map((item) => (
 						<div
-							key={item.id}
+							key={item.title}
 							className={`${styles.availabilityItem} ${
-								item.isAvailable ? styles.available : styles.unavailable
+								item.is_available ? styles.available : styles.unavailable
 							}`}
 						>
 							<div className={styles.itemIndicator}></div>
-							<span className={styles.itemLabel}>{item.label}</span>
+							<span className={styles.itemLabel}>{item.title}</span>
 						</div>
 					))}
 				</div>

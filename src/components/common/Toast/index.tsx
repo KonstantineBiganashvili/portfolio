@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import styles from './toast.module.css';
 
 export interface ToastProps {
@@ -28,7 +29,7 @@ function Toast({
 		}
 	}, [isVisible, duration, onClose]);
 
-	if (!isVisible) return null;
+	if (!isVisible || typeof window === 'undefined') return null;
 
 	const getIcon = () => {
 		switch (type) {
@@ -42,7 +43,7 @@ function Toast({
 		}
 	};
 
-	return (
+	const toastContent = (
 		<div
 			className={`${styles.toastContainer} ${styles[type]} ${
 				isVisible ? styles.show : ''
@@ -62,6 +63,8 @@ function Toast({
 			<div className={styles.toastProgress}></div>
 		</div>
 	);
+
+	return createPortal(toastContent, document.body);
 }
 
 export default Toast;

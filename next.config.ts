@@ -1,5 +1,18 @@
 import type { NextConfig } from 'next';
 
+const getCmsHostname = (): string | undefined => {
+	const cmsUrl = process.env.NEXT_PUBLIC_CMS_URL;
+	if (!cmsUrl) return undefined;
+	try {
+		const url = new URL(cmsUrl);
+		return url.hostname;
+	} catch {
+		return undefined;
+	}
+};
+
+const cmsHostname = getCmsHostname();
+
 const nextConfig: NextConfig = {
 	experimental: {
 		optimizePackageImports: ['lucide-react'],
@@ -10,6 +23,20 @@ const nextConfig: NextConfig = {
 		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
 		dangerouslyAllowSVG: true,
 		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+		...(cmsHostname && {
+			remotePatterns: [
+				{
+					protocol: 'https',
+					hostname: cmsHostname,
+					pathname: '/assets/**',
+				},
+				{
+					protocol: 'http',
+					hostname: cmsHostname,
+					pathname: '/assets/**',
+				},
+			],
+		}),
 	},
 	compiler: {
 		removeConsole: process.env.NODE_ENV === 'production',

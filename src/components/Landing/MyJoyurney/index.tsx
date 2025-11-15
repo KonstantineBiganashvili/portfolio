@@ -1,23 +1,24 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import styles from './myJourney.module.css';
 import clsx from 'clsx';
 import AnimatedTimeline from './AnimatedTimeline';
-import { myJourneyItems } from '@/constants/journey';
+import { usePortfolio } from '@/contexts/PortfolioContext';
 
 function MyJourney() {
 	const wrapperRef = useRef<HTMLDivElement>(null);
+	const {
+		pageData: { myJourney },
+	} = usePortfolio();
 
 	return (
 		<div className={styles.myJourneyWrapper} id='myJourney'>
 			<div className={styles.myJourneyHeader}>
-				<h2 className={styles.myJourneyTitle}>My Journey</h2>
-				<p className={styles.myJourneySubtitle}>
-					A timeline of my professional and educational milestones
-				</p>
+				<h2 className={styles.myJourneyTitle}>{myJourney.page_title}</h2>
+				<p className={styles.myJourneySubtitle}>{myJourney.subtext}</p>
 			</div>
 			<div ref={wrapperRef} className={styles.myJourneyContent}>
 				<AnimatedTimeline containerRef={wrapperRef} />
-				{myJourneyItems.map((item, index) => (
+				{myJourney.journey_items.map((item, index) => (
 					<div
 						className={clsx(
 							styles.myJourneyItem,
@@ -25,12 +26,12 @@ function MyJourney() {
 								? styles.myJourneyItemEven
 								: styles.myJourneyItemOdd,
 						)}
-						key={item.id}
+						key={item.order}
 					>
-						<div className={styles.myJourneyItemNumber}>{item.id}</div>
+						<div className={styles.myJourneyItemNumber}>{item.order}</div>
 						<div className={styles.myJourneyItemContent}>
 							<h3 className={styles.myJourneyItemTitle}>{item.title}</h3>
-							<span className={styles.myJourneyItemDate}>{item.date}</span>
+							<span className={styles.myJourneyItemDate}>{item.dates}</span>
 							<p className={styles.myJourneyItemDescription}>
 								{item.description}
 							</p>

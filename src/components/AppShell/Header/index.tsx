@@ -14,10 +14,26 @@ import {
 	Github,
 	Linkedin,
 } from 'lucide-react';
+import { usePortfolio } from '@/contexts/PortfolioContext';
+
+const icons = {
+	Home: Home,
+	User: User,
+	Code: Code,
+	TrendingUp: TrendingUp,
+	Mail: Mail,
+	Github: Github,
+	GitHub: Github,
+	Linkedin: Linkedin,
+	Email: Mail,
+};
 
 function Header() {
 	const [isVisible, setIsVisible] = useState(true);
 	const [lastScrollY, setLastScrollY] = useState(0);
+	const {
+		pageData: { header },
+	} = usePortfolio();
 
 	useEffect(() => {
 		const handleScroll = () => {
@@ -25,8 +41,7 @@ function Header() {
 
 			if (currentScrollY < 10) {
 				setIsVisible(true);
-			}
-			else if (currentScrollY > lastScrollY && currentScrollY > 100) {
+			} else if (currentScrollY > lastScrollY && currentScrollY > 100) {
 				setIsVisible(false);
 			} else if (currentScrollY < lastScrollY) {
 				setIsVisible(true);
@@ -64,65 +79,42 @@ function Header() {
 				</Link>
 
 				<nav className={styles.navigation}>
-					<button
-						className={styles.navLink}
-						onClick={() => scrollToSection('introduction')}
-					>
-						<Home size={16} />
-						<span>Home</span>
-					</button>
-					<button
-						className={styles.navLink}
-						onClick={() => scrollToSection('aboutMe')}
-					>
-						<User size={16} />
-						<span>About</span>
-					</button>
-					<button
-						className={styles.navLink}
-						onClick={() => scrollToSection('recentWorks')}
-					>
-						<Code size={16} />
-						<span>Projects</span>
-					</button>
-					<button
-						className={styles.navLink}
-						onClick={() => scrollToSection('myJourney')}
-					>
-						<TrendingUp size={16} />
-						<span>Journey</span>
-					</button>
-					<button
-						className={styles.navLink}
-						onClick={() => scrollToSection('contact')}
-					>
-						<Mail size={16} />
-						<span>Contact</span>
-					</button>
+					{header.navigation.map((item) => {
+						const IconComponent = icons[item.icon as keyof typeof icons];
+
+						return (
+							<button
+								key={item.label}
+								className={styles.navLink}
+								onClick={() => scrollToSection(item.path)}
+							>
+								{IconComponent && <IconComponent size={16} />}
+								<span>{item.label}</span>
+							</button>
+						);
+					})}
 				</nav>
 
 				<div className={styles.headerActions}>
 					<div className={styles.divider}></div>
 					<ThemeSwitch />
 					<div className={styles.socialLinks}>
-						<Link
-							href='https://github.com/KonstantineBiganashvili'
-							target='_blank'
-							rel='noopener noreferrer'
-							className={styles.socialLink}
-							title='GitHub'
-						>
-							<Github size={18} />
-						</Link>
-						<Link
-							href='https://www.linkedin.com/in/konstantine-biganashvili-553a20246/'
-							target='_blank'
-							rel='noopener noreferrer'
-							className={styles.socialLink}
-							title='LinkedIn'
-						>
-							<Linkedin size={18} />
-						</Link>
+						{header.socials.map((item) => {
+							const IconComponent = icons[item.icon as keyof typeof icons];
+
+							return (
+								<Link
+									key={item.label}
+									href={item.path}
+									target='_blank'
+									rel='noopener noreferrer'
+									className={styles.socialLink}
+									title={item.label}
+								>
+									{IconComponent && <IconComponent size={18} />}
+								</Link>
+							);
+						})}
 					</div>
 				</div>
 			</div>

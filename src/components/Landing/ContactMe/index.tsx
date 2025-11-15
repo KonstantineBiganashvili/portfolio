@@ -7,9 +7,13 @@ import ContactInfo from './ContactInfo';
 import Availability from './Availability';
 import Toast from '@/components/common/Toast';
 import type { FormData } from './ContactForm';
+import { usePortfolio } from '@/contexts/PortfolioContext';
 
 function ContactMe() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
+	const {
+		pageData: { contact },
+	} = usePortfolio();
 
 	const [toast, setToast] = useState({
 		isVisible: false,
@@ -77,11 +81,8 @@ function ContactMe() {
 	return (
 		<div className={styles.contactMeWrapper} id='contact'>
 			<div className={styles.contactMeHeader}>
-				<h2 className={styles.contactMeTitle}>Let&apos;s Connect</h2>
-				<p className={styles.contactMeSubtitle}>
-					Ready to discuss your next project, explore collaboration
-					opportunities, or just say hello? I&apos;d love to hear from you.
-				</p>
+				<h2 className={styles.contactMeTitle}>{contact.page_title}</h2>
+				<p className={styles.contactMeSubtitle}>{contact.subtext}</p>
 			</div>
 			<div className={styles.topSection}>
 				<ContactForm onSubmit={handleFormSubmit} isSubmitting={isSubmitting} />

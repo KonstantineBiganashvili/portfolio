@@ -21,35 +21,11 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 const THEME_STORAGE_KEY = 'portfolio-theme';
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-	const [theme, setThemeState] = useState<Theme>(() => ({
+	const [theme, setThemeState] = useState<Theme>({
 		mode: 'light',
 		colors: THEME_COLORS.light,
 		isDay: true,
-	}));
-
-	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
-			if (savedTheme) {
-				try {
-					const parsedTheme = JSON.parse(savedTheme) as ThemeMode;
-					if (parsedTheme === 'light' || parsedTheme === 'dark') {
-						updateTheme(parsedTheme);
-					}
-				} catch (error) {
-					console.warn('Failed to parse saved theme:', error);
-				}
-			} else {
-				updateCSSVariables(THEME_COLORS.light);
-			}
-		}
-	}, []);
-
-	useEffect(() => {
-		if (typeof window !== 'undefined') {
-			localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(theme.mode));
-		}
-	}, [theme.mode]);
+	});
 
 	const updateTheme = (mode: ThemeMode) => {
 		const newColors = THEME_COLORS[mode];
@@ -59,7 +35,34 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
 			isDay: mode === 'light',
 		});
 		updateCSSVariables(newColors);
+
+		// Save to localStorage
+		if (typeof window !== 'undefined') {
+			localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(mode));
+		}
 	};
+
+	useEffect(() => {
+		const savedTheme = localStorage.getItem(THEME_STORAGE_KEY);
+		if (savedTheme) {
+			try {
+				const parsedTheme = JSON.parse(savedTheme) as ThemeMode;
+				if (parsedTheme === 'light' || parsedTheme === 'dark') {
+					const newColors = THEME_COLORS[parsedTheme];
+					setThemeState({
+						mode: parsedTheme,
+						colors: newColors,
+						isDay: parsedTheme === 'light',
+					});
+					updateCSSVariables(newColors);
+				}
+			} catch (error) {
+				console.warn('Failed to parse saved theme:', error);
+			}
+		} else {
+			updateCSSVariables(THEME_COLORS.light);
+		}
+	}, []);
 
 	const toggleTheme = () => {
 		const newMode = theme.mode === 'light' ? 'dark' : 'light';

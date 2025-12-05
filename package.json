@@ -9,30 +9,30 @@
     "lint": "eslint ."
   },
   "dependencies": {
-    "@directus/sdk": "^20.1.1",
-    "@react-three/drei": "^10.4.2",
-    "@react-three/fiber": "^9.1.4",
+    "@directus/sdk": "^20.2.0",
+    "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "@react-three/postprocessing": "^3.0.4",
     "clsx": "^2.1.1",
     "gsap": "^3.13.0",
-    "lucide-react": "^0.544.0",
-    "next": "16.0.3",
-    "react": "19.2.0",
+    "lucide-react": "^0.556.0",
+    "next": "16.0.7",
+    "react": "19.2.1",
     "react-calendly": "^4.4.0",
-    "react-dom": "19.2.0",
+    "react-dom": "19.2.1",
     "react-use": "^17.6.0",
-    "three-custom-shader-material": "^6.3.7"
+    "three-custom-shader-material": "^6.4.0"
   },
   "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "19.2.4",
+    "@types/node": "^24",
+    "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
     "eslint": "^9",
-    "eslint-config-next": "16.0.3",
+    "eslint-config-next": "16.0.7",
     "typescript": "^5"
   },
   "overrides": {
-    "@types/react": "19.2.4",
+    "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3"
   }
 }

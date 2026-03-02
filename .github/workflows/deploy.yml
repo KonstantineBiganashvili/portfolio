@@ -47,4 +47,4 @@ jobs:
           key: ${{ secrets.HETZNER_SSH_KEY_GHCR }}
           script: |
             echo "Running deployment script..."
-            /home/ghcr/apps/portfolio/deploy.sh
+            bash -x /home/ghcr/apps/portfolio/deploy.sh 2>&1

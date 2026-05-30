@@ -1,4 +1,4 @@
-name: Build, Push to GHCR and Deploy to Private Server
+name: Build, push to GHCR, and update GitOps manifests
 
 on:
   push:
@@ -8,13 +8,24 @@ permissions:
   contents: read
   packages: write
 
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
+concurrency:
+  group: portfolio-deploy
+  cancel-in-progress: true
 
+jobs:
+  build-push-deploy:
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
+      - name: Checkout portfolio
         uses: actions/checkout@v4
+
+      - name: Compute image name + tag
+        id: img
+        run: |
+          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          echo "image=ghcr.io/${OWNER}/${REPO}" >> "$GITHUB_OUTPUT"
+          echo "tag=sha-${GITHUB_SHA::12}" >> "$GITHUB_OUTPUT"
 
       - name: Log in to GHCR
         uses: docker/login-action@v3
@@ -23,28 +34,37 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GHCR_TOKEN }}
 
-      - name: Build image
-        run: |
-          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
-          echo "Building image: $IMAGE_NAME:latest"
-          docker build -t "$IMAGE_NAME:latest" .
-
-      - name: Push image
-        run: |
-          OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
-          REPO=$(basename "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
-          IMAGE_NAME="ghcr.io/${OWNER}/${REPO}"
-          echo "Pushing image"
-          docker push "$IMAGE_NAME:latest"
-
-      - name: Deploy on Hetzner Server
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Build & push image
+        id: build
+        uses: docker/build-push-action@v6
         with:
-          host: ${{ secrets.HETZNER_HOST }}
-          username: ${{ secrets.HETZNER_USER }}
-          key: ${{ secrets.HETZNER_SSH_KEY_GHCR }}
-          script: |
-            echo "Running deployment script..."
-            bash -x /home/ghcr/apps/portfolio/deploy.sh 2>&1
+          context: .
+          push: true
+          tags: |
+            ${{ steps.img.outputs.image }}:${{ steps.img.outputs.tag }}
+            ${{ steps.img.outputs.image }}:latest
+
+      - name: Pin new digest in argocd-manifests (GitOps)
+        env:
+          DEPLOY_KEY: ${{ secrets.MANIFESTS_DEPLOY_KEY }}
+          IMAGE: ${{ steps.img.outputs.image }}
+          DIGEST: ${{ steps.build.outputs.digest }}
+          TAG: ${{ steps.img.outputs.tag }}
+        run: |
+          set -euo pipefail
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$DEPLOY_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan -t ed25519 github.com >> ~/.ssh/known_hosts 2>/dev/null
+          git clone --depth 1 git@github.com:KonstantineBiganashvili/argocd-manifests.git m
+          cd m
+          # Replace the pinned digest on the portfolio image line (preserves indentation).
+          sed -i -E "s#(image:[[:space:]]+)${IMAGE}@sha256:[a-f0-9]+#\1${IMAGE}@${DIGEST}#" workloads/portfolio/portfolio.yaml
+          git config user.name "portfolio-ci"
+          git config user.email "ci@biganashvili.dev"
+          if git diff --quiet; then
+            echo "No image change to commit."; exit 0
+          fi
+          git add workloads/portfolio/portfolio.yaml
+          git commit -m "portfolio: deploy ${TAG} (${DIGEST})"
+          git push origin main

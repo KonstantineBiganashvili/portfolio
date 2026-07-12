@@ -2,9 +2,9 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	gap: 8px;
-	padding: 12px 24px;
-	border-radius: 16px;
+	gap: var(--space-2);
+	padding: var(--space-3) var(--space-6);
+	border-radius: var(--radius-lg);
 	font-size: 0.95rem;
 	font-weight: 600;
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -19,13 +19,13 @@
 	);
 	background-clip: padding-box;
 	color: white;
-	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+	box-shadow: var(--shadow-glow);
 	text-decoration: none;
 }
 
 .contactButton:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+	box-shadow: var(--shadow-glow);
 }
 
 .contactButton:active {
@@ -34,7 +34,7 @@
 
 .contactButton:focus {
 	outline: none;
-	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.5);
+	box-shadow: var(--shadow-glow);
 }
 
 @media (max-width: 768px) {
@@ -47,7 +47,7 @@
 @media (max-width: 480px) {
 	.contactButton {
 		width: 100%;
-		padding: 12px 16px;
+		padding: var(--space-3) var(--space-4);
 		font-size: 0.9rem;
 	}
 }

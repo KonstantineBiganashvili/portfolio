@@ -16,6 +16,9 @@ export const CSS_VARIABLES = {
 	BACKGROUND_RGB: '--theme-background-rgb',
 	CARD_BACKGROUND_RGB: '--theme-card-background-rgb',
 	MUTED_BACKGROUND_RGB: '--theme-muted-background-rgb',
+	PRIMARY_RGB: '--theme-primary-rgb',
+	SECONDARY_RGB: '--theme-secondary-rgb',
+	BORDER_RGB: '--theme-border-rgb',
 } as const;
 
 export function updateCSSVariables(colors: ColorPalette) {
@@ -49,6 +52,9 @@ export function updateCSSVariables(colors: ColorPalette) {
 			CSS_VARIABLES.MUTED_BACKGROUND_RGB,
 			colors.mutedBackgroundRgb,
 		);
+		root.style.setProperty(CSS_VARIABLES.PRIMARY_RGB, colors.primaryRgb);
+		root.style.setProperty(CSS_VARIABLES.SECONDARY_RGB, colors.secondaryRgb);
+		root.style.setProperty(CSS_VARIABLES.BORDER_RGB, colors.borderRgb);
 	}
 }
 

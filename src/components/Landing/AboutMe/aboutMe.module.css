@@ -1,7 +1,7 @@
 .aboutMeWrapper {
 	width: 100%;
 	height: 100%;
-	padding: 32px 0;
+	padding: var(--space-8) 0;
 	max-width: 1200px;
 	margin: 0 auto;
 	display: flex;
@@ -18,7 +18,7 @@
 .aboutMeTitle {
 	font-size: 3.5rem;
 	font-weight: 700;
-	margin: 0 0 24px 0;
+	margin: 0 0 var(--space-6) 0;
 	background: linear-gradient(
 		135deg,
 		var(--theme-primary-text),
@@ -48,7 +48,7 @@
 .profileSection {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: var(--space-6);
 }
 
 .profileTitle {
@@ -67,7 +67,7 @@
 }
 
 .profileDescription p {
-	margin: 0 0 16px 0;
+	margin: 0 0 var(--space-4) 0;
 }
 
 .profileDescription p:last-child {
@@ -78,7 +78,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	gap: 24px;
+	gap: var(--space-6);
 	width: 100%;
 	height: 100%;
 }
@@ -91,13 +91,13 @@
 	font-size: 1.8rem;
 	font-weight: 600;
 	color: var(--theme-primary-text);
-	margin: 0 0 32px 0;
+	margin: 0 0 var(--space-8) 0;
 }
 
 .skillsGrid {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 16px;
+	gap: var(--space-4);
 	justify-content: center;
 }
 
@@ -126,7 +126,7 @@
 @media (max-width: 768px) {
 	.aboutMeWrapper {
 		padding: 40px 15px;
-		gap: 40px;
+		gap: var(--space-10);
 	}
 
 	.aboutMeTitle {
@@ -142,11 +142,11 @@
 	}
 
 	.profileDescription {
-		font-size: 1rem;
+		font-size: var(--text-base);
 	}
 
 	.skillsGrid {
-		gap: 12px;
+		gap: var(--space-3);
 	}
 }
 
@@ -175,6 +175,6 @@
 	}
 
 	.skillsGrid {
-		gap: 8px;
+		gap: var(--space-2);
 	}
 }

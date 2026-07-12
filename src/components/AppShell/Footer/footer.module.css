@@ -1,21 +1,21 @@
 .footer {
 	background-color: var(--theme-background);
 	border-top: 1px solid var(--theme-border);
-	margin-top: 80px;
+	margin-top: var(--space-20);
   z-index: 100;
 }
 
 .footerContent {
 	max-width: 1400px;
 	margin: 0 auto;
-	padding: 0 32px;
+	padding: 0 var(--space-8);
 }
 
 .footerMain {
 	display: grid;
 	grid-template-columns: 2fr 1fr 1fr;
-	gap: 48px;
-	padding: 64px 0 48px 0;
+	gap: var(--space-12);
+	padding: var(--space-16) 0 var(--space-12) 0;
 }
 
 .brandSection {
@@ -27,11 +27,11 @@
 .logoLink {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 	color: var(--theme-primary-text);
 	text-decoration: none;
 	transition: all 0.3s ease;
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	width: fit-content;
 }
 
@@ -43,7 +43,7 @@
 		var(--theme-primary),
 		var(--theme-secondary)
 	);
-	border-radius: 10px;
+	border-radius: var(--radius-md);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -66,7 +66,7 @@
 
 .logoLink:hover .logoIcon {
 	transform: scale(1.05);
-	box-shadow: 0 4px 12px rgba(var(--theme-primary-rgb), 0.4);
+	box-shadow: var(--shadow-glow);
 }
 
 .brandDescription {
@@ -79,7 +79,7 @@
 .socialLinks {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 }
 
 .socialLink {
@@ -87,7 +87,7 @@
 	height: 44px;
 	background: rgba(var(--theme-border-rgb), 0.1);
 	border: 1px solid var(--theme-border);
-	border-radius: 50%;
+	border-radius: var(--radius-full);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -120,7 +120,7 @@
 .footerNav {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: var(--space-3);
 }
 
 .navLink {
@@ -129,7 +129,7 @@
 	color: var(--theme-secondary-text);
 	font-size: 0.95rem;
 	font-weight: 500;
-	padding: 8px 0;
+	padding: var(--space-2) 0;
 	cursor: pointer;
 	transition: all 0.3s ease;
 	text-align: left;
@@ -144,13 +144,13 @@
 .contactInfo {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: var(--space-4);
 }
 
 .contactItem {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 	color: var(--theme-secondary-text);
 	font-size: 0.95rem;
 }
@@ -168,7 +168,7 @@
 .availabilityStatus {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 	color: var(--theme-secondary-text);
 	font-size: 0.95rem;
 }
@@ -177,8 +177,8 @@
 	width: 12px;
 	height: 12px;
 	margin: 2px;
-	background: #16a34a;
-	border-radius: 50%;
+	background: var(--theme-success);
+	border-radius: var(--radius-full);
 	animation: pulse 2s infinite;
 }
 
@@ -196,7 +196,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	padding: 24px 0;
+	padding: var(--space-6) 0;
 	border-top: 1px solid var(--theme-border);
 }
 
@@ -208,15 +208,15 @@
 .backToTop {
 	display: flex;
 	align-items: center;
-	gap: 8px;
+	gap: var(--space-2);
 	background: none;
 	border: none;
 	color: var(--theme-secondary-text);
 	font-size: 0.9rem;
 	cursor: pointer;
 	transition: all 0.3s ease;
-	padding: 8px 12px;
-	border-radius: 6px;
+	padding: var(--space-2) var(--space-3);
+	border-radius: var(--radius-sm);
 }
 
 .backToTop:hover {
@@ -228,7 +228,7 @@
 @media (max-width: 1024px) {
 	.footerMain {
 		grid-template-columns: 1fr 1fr;
-		gap: 32px;
+		gap: var(--space-8);
 	}
 
 	.brandSection {
@@ -238,23 +238,23 @@
 
 @media (max-width: 768px) {
 	.footerContent {
-		padding: 0 16px;
+		padding: 0 var(--space-4);
 	}
 
 	.footerMain {
 		grid-template-columns: 1fr;
-		gap: 32px;
-		padding: 48px 0 32px 0;
+		gap: var(--space-8);
+		padding: var(--space-12) 0 var(--space-8) 0;
 	}
 
 	.footerBottom {
 		flex-direction: column;
-		gap: 16px;
+		gap: var(--space-4);
 		text-align: center;
 	}
 
 	.socialLinks {
-		gap: 8px;
+		gap: var(--space-2);
 	}
 
 	.socialLink {

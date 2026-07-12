@@ -3,7 +3,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	gap: 16px;
+	gap: var(--space-4);
 	height: 100%;
 }
 
@@ -11,19 +11,19 @@
 	width: 100%;
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 24px;
+	border-radius: var(--radius-2xl);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-	padding: 32px;
+	box-shadow: var(--shadow-lg);
+	padding: var(--space-8);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: var(--space-4);
 }
 
 .contactInfo:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--shadow-lg);
 	border-color: var(--theme-primary);
 }
 
@@ -37,15 +37,15 @@
 .contactDetails {
 	display: flex;
 	flex-direction: column;
-	gap: 32px;
+	gap: var(--space-8);
 }
 
 .contactItem {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: var(--space-4);
 	background: rgba(var(--theme-border-rgb), 0.05);
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	border: 1px solid rgba(var(--theme-border-rgb), 0.1);
 	transition: all 0.3s ease;
 }
@@ -63,18 +63,18 @@
 		var(--theme-primary),
 		var(--theme-secondary)
 	);
-	border-radius: 10px;
+	border-radius: var(--radius-md);
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	font-size: 1rem;
+	font-size: var(--text-base);
 	flex-shrink: 0;
 }
 
 .contactContent {
 	display: flex;
 	flex-direction: column;
-	gap: 4px;
+	gap: var(--space-1);
 }
 
 .contactLabel {
@@ -98,7 +98,7 @@
 .socialSection {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: var(--space-4);
 }
 
 .socialTitle {
@@ -110,7 +110,7 @@
 
 .socialLinks {
 	display: flex;
-	gap: 12px;
+	gap: var(--space-3);
 }
 
 .socialLink {
@@ -118,7 +118,7 @@
 	height: 48px;
 	background: rgba(var(--theme-border-rgb), 0.1);
 	border: 2px solid var(--theme-border);
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -147,13 +147,13 @@
 }
 
 .contactCtaContent {
-	margin-bottom: 24px;
+	margin-bottom: var(--space-6);
 }
 
 .contactCtaTitle {
 	font-size: 2rem;
 	font-weight: 700;
-	margin: 0 0 12px 0;
+	margin: 0 0 var(--space-3) 0;
 	background: linear-gradient(
 		135deg,
 		var(--theme-primary),
@@ -166,7 +166,7 @@
 
 .contactCtaButtons {
 	display: flex;
-	gap: 16px;
+	gap: var(--space-4);
 	justify-content: center;
 	align-items: center;
 }
@@ -180,8 +180,8 @@ button.contactScheduleButton,
 	);
 	color: white;
 	border: none;
-	padding: 12px 24px;
-	border-radius: 12px;
+	padding: var(--space-3) var(--space-6);
+	border-radius: var(--radius-md);
 	font-size: 0.9rem;
 	font-weight: 600;
 	cursor: pointer;
@@ -193,7 +193,7 @@ button.contactScheduleButton,
 	gap: 6px;
 	min-height: 48px;
 	min-width: 140px;
-	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+	box-shadow: var(--shadow-glow);
 }
 
 button.calendlyButtonWrapper {
@@ -208,8 +208,8 @@ button.calendlyButtonWrapper {
 	);
 	color: white;
 	border: none;
-	padding: 12px 24px;
-	border-radius: 12px;
+	padding: var(--space-3) var(--space-6);
+	border-radius: var(--radius-md);
 	font-size: 0.9rem;
 	font-weight: 600;
 	cursor: pointer;
@@ -217,12 +217,12 @@ button.calendlyButtonWrapper {
 	text-decoration: none;
 	min-height: 48px;
 	min-width: 140px;
-	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+	box-shadow: var(--shadow-glow);
 }
 
 .calendlyButtonWrapper:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+	box-shadow: var(--shadow-glow);
 }
 
 .calendlyButtonWrapper:active {
@@ -244,7 +244,7 @@ button.contactScheduleButton:hover,
 .contactResumeButton:hover,
 .calendlyButtonWrapper:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 24px rgba(14, 165, 233, 0.4);
+	box-shadow: var(--shadow-glow);
 }
 
 button.contactScheduleButton:active,
@@ -266,7 +266,7 @@ button.contactScheduleButton:disabled {
 
 @media (max-width: 768px) {
 	.contactInfo {
-		gap: 24px;
+		gap: var(--space-6);
 	}
 
 	.contactIcon {
@@ -285,7 +285,7 @@ button.contactScheduleButton:disabled {
 
 	.contactCtaButtons {
 		flex-direction: column;
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	button.contactScheduleButton,
@@ -302,11 +302,11 @@ button.contactScheduleButton:disabled {
 	}
 
 	.contactDetails {
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	.contactItem {
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	.contactIcon {
@@ -320,7 +320,7 @@ button.contactScheduleButton:disabled {
 	}
 
 	.socialLinks {
-		gap: 8px;
+		gap: var(--space-2);
 	}
 
 	.socialLink {

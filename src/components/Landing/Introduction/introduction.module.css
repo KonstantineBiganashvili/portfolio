@@ -2,12 +2,12 @@
 	position: relative;
 	width: 100%;
 	height: calc(100vh - 72px);
-	padding: 32px 0;
+	padding: var(--space-8) 0;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 16px;
+	gap: var(--space-4);
 	z-index: 10;
 }
 
@@ -16,20 +16,20 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: center;
-	gap: 16px;
+	gap: var(--space-4);
 }
 
 .introductionText {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 16px;
+	gap: var(--space-4);
 	max-width: 600px;
 }
 
 .introductionText h1 {
 	color: var(--theme-primary-text);
-	font-size: 3rem;
+	font-size: var(--text-5xl);
 	font-weight: 700;
 	margin: 0;
 	text-align: center;
@@ -46,7 +46,7 @@
 
 .availability {
 	color: var(--theme-primary-text);
-	font-size: 1rem;
+	font-size: var(--text-base);
 	font-weight: 500;
 	text-align: center;
 	margin: 0;
@@ -56,9 +56,9 @@
 .techBadges {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 12px;
+	gap: var(--space-3);
 	justify-content: center;
-	margin-top: 8px;
+	margin-top: var(--space-2);
 }
 
 .divider {
@@ -70,12 +70,12 @@
 		var(--theme-border),
 		transparent
 	);
-	margin: 24px 0;
+	margin: var(--space-6) 0;
 }
 
 .contactButtons {
 	display: flex;
-	gap: 16px;
+	gap: var(--space-4);
 	justify-content: center;
 	flex-wrap: wrap;
 }
@@ -91,12 +91,12 @@
 	.introductionWrapper {
 		height: auto;
 		min-height: calc(100vh - 72px);
-		padding: 40px 20px;
+		padding: var(--space-10) 20px;
 	}
 
 	.introductionContent {
 		flex-direction: column;
-		gap: 40px;
+		gap: var(--space-10);
 	}
 
 	.buildingWebsiteSvg {
@@ -107,7 +107,7 @@
 @media (max-width: 768px) {
 	.introductionWrapper {
 		padding: 30px 15px;
-		gap: 8px;
+		gap: var(--space-2);
 	}
 
 	.introductionContent {
@@ -116,7 +116,7 @@
 
 	.introductionText {
 		max-width: 100%;
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	.introductionText h1 {
@@ -132,7 +132,7 @@
 	}
 
 	.techBadges {
-		gap: 8px;
+		gap: var(--space-2);
 		margin-top: 6px;
 	}
 
@@ -141,7 +141,7 @@
 	}
 
 	.contactButtons {
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	.buildingWebsiteSvg {
@@ -155,7 +155,7 @@
 	}
 
 	.introductionContent {
-		gap: 24px;
+		gap: var(--space-6);
 	}
 
 	.introductionText {
@@ -168,7 +168,7 @@
 	}
 
 	.description {
-		font-size: 1rem;
+		font-size: var(--text-base);
 		line-height: 1.5;
 	}
 

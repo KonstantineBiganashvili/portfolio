@@ -22,7 +22,7 @@
 	height: 24px;
 	background-color: var(--theme-muted-background);
 	border: 1px solid var(--theme-border);
-	border-radius: 50px;
+	border-radius: var(--radius-full);
 	position: relative;
 	transition: var(--theme-transition);
 }
@@ -34,12 +34,12 @@
 	width: 20px;
 	height: 20px;
 	background-color: var(--theme-card-background);
-	border-radius: 50%;
+	border-radius: var(--radius-full);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	box-shadow: var(--shadow-sm);
 }
 
 .switchThumbDark {
@@ -55,21 +55,21 @@
 }
 
 .themeSwitch:not(.switchThumbDark) .switchTrack {
-	background-color: rgba(var(--theme-primary-rgb, 14, 165, 233), 0.1);
+	background-color: rgba(var(--theme-primary-rgb), 0.1);
 	border-color: var(--theme-primary);
 }
 
 .switchThumbDark .switchTrack {
-	background-color: rgba(var(--theme-secondary-rgb, 6, 182, 212), 0.2);
+	background-color: rgba(var(--theme-secondary-rgb), 0.2);
 	border-color: var(--theme-secondary);
 }
 
 .themeSwitch:hover .switchTrack {
-	background-color: rgba(var(--theme-primary-rgb, 14, 165, 233), 0.15);
+	background-color: rgba(var(--theme-primary-rgb), 0.15);
 }
 
 .themeSwitch:hover .switchThumb {
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+	box-shadow: var(--shadow-sm);
 }
 
 .themeSwitch:active .switchThumb {

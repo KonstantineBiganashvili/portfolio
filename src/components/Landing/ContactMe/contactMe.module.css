@@ -1,12 +1,12 @@
 .contactMeWrapper {
 	width: 100%;
 	max-width: 1200px;
-	padding: 32px 0;
+	padding: var(--space-8) 0;
 	height: 100%;
 	margin: 0 auto;
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: var(--space-10);
 	z-index: 10;
 }
 
@@ -18,7 +18,7 @@
 .contactMeTitle {
 	font-size: 3.5rem;
 	font-weight: 700;
-	margin: 0 0 24px 0;
+	margin: 0 0 var(--space-6) 0;
 	background: linear-gradient(
 		135deg,
 		var(--theme-primary-text),
@@ -41,14 +41,14 @@
 .topSection {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 40px;
+	gap: var(--space-10);
 	align-items: start;
 }
 
 .contactInfo {
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: var(--space-10);
 }
 
 .infoTitle {
@@ -61,25 +61,25 @@
 .contactDetails {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: var(--space-6);
 }
 
 .contactItem {
 	display: flex;
 	align-items: center;
-	gap: 16px;
+	gap: var(--space-4);
 	padding: 20px;
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	box-shadow: var(--shadow-sm);
 	transition: all 0.3s ease;
 }
 
 .contactItem:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+	box-shadow: var(--shadow-md);
 	border-color: var(--theme-primary);
 }
 
@@ -91,7 +91,7 @@
 		var(--theme-primary),
 		var(--theme-secondary)
 	);
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -102,7 +102,7 @@
 .contactContent {
 	display: flex;
 	justify-content: center;
-	gap: 8px;
+	gap: var(--space-2);
 }
 
 .contactLabel {
@@ -126,11 +126,11 @@
 .socialSection {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	padding: 24px;
+	gap: var(--space-4);
+	padding: var(--space-6);
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 	border: 1px solid var(--theme-border);
 }
 
@@ -143,7 +143,7 @@
 
 .socialLinks {
 	display: flex;
-	gap: 12px;
+	gap: var(--space-3);
 }
 
 .socialLink {
@@ -151,7 +151,7 @@
 	height: 48px;
 	background: rgba(var(--theme-border-rgb), 0.1);
 	border: 2px solid var(--theme-border);
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -176,11 +176,11 @@
 .resumeSection {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
-	padding: 24px;
+	gap: var(--space-4);
+	padding: var(--space-6);
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 	border: 1px solid var(--theme-border);
 }
 
@@ -192,7 +192,7 @@
 }
 
 .resumeDescription {
-	font-size: 1rem;
+	font-size: var(--text-base);
 	color: var(--theme-secondary-text);
 	line-height: 1.5;
 	margin: 0;
@@ -201,24 +201,24 @@
 .availabilitySection {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: var(--space-3);
 	padding: 20px;
 	background: rgba(34, 197, 94, 0.1);
 	border: 1px solid rgba(34, 197, 94, 0.2);
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 }
 
 .availabilityIndicator {
 	display: flex;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 }
 
 .availabilityDot {
 	width: 12px;
 	height: 12px;
-	background: #22c55e;
-	border-radius: 50%;
+	background: var(--theme-success);
+	border-radius: var(--radius-full);
 	animation: pulse 2s infinite;
 }
 
@@ -237,7 +237,7 @@
 .availabilityText {
 	font-size: 1.1rem;
 	font-weight: 600;
-	color: #22c55e;
+	color: var(--theme-success);
 }
 
 .availabilityDescription {
@@ -250,13 +250,13 @@
 @media (max-width: 1024px) {
 	.topSection {
 		grid-template-columns: 1fr;
-		gap: 32px;
+		gap: var(--space-8);
 	}
 }
 
 @media (max-width: 768px) {
 	.contactMeWrapper {
-		gap: 32px;
+		gap: var(--space-8);
 	}
 
 	.contactMeTitle {
@@ -268,14 +268,14 @@
 	}
 
 	.topSection {
-		gap: 24px;
-		margin-bottom: 24px;
+		gap: var(--space-6);
+		margin-bottom: var(--space-6);
 	}
 }
 
 @media (max-width: 480px) {
 	.contactMeWrapper {
-		gap: 24px;
+		gap: var(--space-6);
 	}
 
 	.contactMeTitle {

@@ -6,7 +6,7 @@
 	flex-direction: column;
 	gap: 60px;
 	z-index: 10;
-	padding: 32px 0;
+	padding: var(--space-8) 0;
 }
 
 .recentWorksHeader {
@@ -17,7 +17,7 @@
 .recentWorksTitle {
 	font-size: 3.5rem;
 	font-weight: 700;
-	margin: 0 0 24px 0;
+	margin: 0 0 var(--space-6) 0;
 	background: linear-gradient(
 		135deg,
 		var(--theme-primary-text),
@@ -40,7 +40,7 @@
 .projectsGrid {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	gap: 32px;
+	gap: var(--space-8);
 }
 
 .projectCard {
@@ -48,9 +48,9 @@
 	flex-direction: column;
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 20px;
+	border-radius: var(--radius-xl);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+	box-shadow: var(--shadow-lg);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	overflow: hidden;
 	cursor: pointer;
@@ -58,7 +58,7 @@
 
 .projectCard:hover {
 	transform: translateY(-8px) scale(1.02);
-	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12), 0 8px 16px rgba(0, 0, 0, 0.08);
+	box-shadow: var(--shadow-lg), var(--shadow-md);
 	border-color: var(--theme-primary);
 }
 
@@ -94,7 +94,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border-radius: 20px 20px 0 0;
+	border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 	opacity: 0;
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	z-index: 2;
@@ -108,7 +108,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: 12px;
+	gap: var(--space-3);
 	text-align: center;
 	text-decoration: none;
 	color: inherit;
@@ -119,28 +119,28 @@
 
 .overlayText {
 	color: white;
-	font-size: 1rem;
+	font-size: var(--text-base);
 	font-weight: 600;
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .playIcon {
-	font-size: 3rem;
+	font-size: var(--text-5xl);
 	color: rgba(255, 255, 255, 0.8);
 	text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .projectStatus {
 	position: absolute;
-	top: 16px;
-	left: 16px;
+	top: var(--space-4);
+	left: var(--space-4);
 }
 
 .statusBadge {
 	display: inline-flex;
 	align-items: center;
-	padding: 6px 12px;
-	border-radius: 16px;
+	padding: 6px var(--space-3);
+	border-radius: var(--radius-lg);
 	font-size: 0.8rem;
 	font-weight: 600;
 	text-transform: uppercase;
@@ -149,13 +149,13 @@
 
 .statusBadge.live {
 	background: rgba(34, 197, 94, 0.2);
-	color: #22c55e;
+	color: var(--theme-success);
 	border: 1px solid rgba(34, 197, 94, 0.3);
 }
 
 .statusBadge.development {
 	background: rgba(251, 191, 36, 0.2);
-	color: #fbbf24;
+	color: var(--theme-warning);
 	border: 1px solid rgba(251, 191, 36, 0.3);
 }
 
@@ -168,7 +168,7 @@
 }
 
 .projectTitle {
-	font-size: 1.5rem;
+	font-size: var(--text-2xl);
 	font-weight: 600;
 	color: var(--theme-primary-text);
 	margin: 0;
@@ -176,7 +176,7 @@
 }
 
 .projectDescription {
-	font-size: 1rem;
+	font-size: var(--text-base);
 	color: var(--theme-secondary-text);
 	line-height: 1.6;
 	margin: 0;
@@ -186,22 +186,22 @@
 .projectTechnologies {
 	display: flex;
 	flex-wrap: wrap;
-	gap: 8px;
+	gap: var(--space-2);
 }
 
 .projectActions {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 12px;
+	gap: var(--space-3);
 	margin-top: auto;
 }
 
 .actionButton {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
-	padding: 12px 20px;
+	gap: var(--space-2);
+	padding: var(--space-3) 20px;
 	background: linear-gradient(
 		135deg,
 		var(--theme-primary),
@@ -209,7 +209,7 @@
 	);
 	color: white;
 	border: 2px solid transparent;
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 	font-size: 0.9rem;
 	font-weight: 600;
 	cursor: pointer;
@@ -217,7 +217,7 @@
 	text-decoration: none;
 	backdrop-filter: blur(12px);
 	background-clip: padding-box;
-	box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
+	box-shadow: var(--shadow-glow);
 	flex: 1;
 	justify-content: center;
 	user-select: none;
@@ -225,19 +225,19 @@
 
 .actionButton:hover {
 	transform: translateY(-2px);
-	box-shadow: 0 6px 16px rgba(14, 165, 233, 0.4);
+	box-shadow: var(--shadow-glow);
 	color: white;
 }
 
 .actionButtonSecondary {
 	display: inline-flex;
 	align-items: center;
-	gap: 8px;
-	padding: 12px 20px;
+	gap: var(--space-2);
+	padding: var(--space-3) 20px;
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	color: var(--theme-primary-text);
 	border: 2px solid var(--theme-border);
-	border-radius: 16px;
+	border-radius: var(--radius-lg);
 	font-size: 0.9rem;
 	font-weight: 600;
 	cursor: pointer;
@@ -247,24 +247,24 @@
 	flex: 1;
 	justify-content: center;
 	user-select: none;
-	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+	box-shadow: var(--shadow-sm);
 }
 
 .actionButtonSecondary:hover {
 	transform: translateY(-2px);
 	border-color: var(--theme-primary);
-	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+	box-shadow: var(--shadow-md);
 	color: var(--theme-primary-text);
 }
 
 .explanation {
 	text-align: center;
-	padding: 32px;
+	padding: var(--space-8);
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 20px;
+	border-radius: var(--radius-xl);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+	box-shadow: var(--shadow-lg);
 }
 
 .explanation p {
@@ -288,13 +288,13 @@
 
 	.projectsGrid {
 		grid-template-columns: 1fr;
-		gap: 24px;
+		gap: var(--space-6);
 	}
 }
 
 @media (max-width: 768px) {
 	.recentWorksWrapper {
-		gap: 40px;
+		gap: var(--space-10);
 	}
 
 	.recentWorksTitle {
@@ -306,8 +306,8 @@
 	}
 
 	.projectContent {
-		padding: 24px;
-		gap: 16px;
+		padding: var(--space-6);
+		gap: var(--space-4);
 	}
 
 	.projectTitle {
@@ -329,11 +329,11 @@
 	}
 
 	.explanation {
-		padding: 24px;
+		padding: var(--space-6);
 	}
 
 	.explanation p {
-		font-size: 1rem;
+		font-size: var(--text-base);
 	}
 }
 

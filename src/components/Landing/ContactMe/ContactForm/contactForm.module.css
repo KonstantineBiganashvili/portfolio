@@ -1,20 +1,20 @@
 .contactForm {
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 24px;
+	border-radius: var(--radius-2xl);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-	padding: 40px;
+	box-shadow: var(--shadow-lg);
+	padding: var(--space-10);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
+	gap: var(--space-4);
 	height: 100%;
 }
 
 .contactForm:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--shadow-lg);
 	border-color: var(--theme-primary);
 }
 
@@ -25,7 +25,7 @@
 }
 
 .formDescription {
-	font-size: 1rem;
+	font-size: var(--text-base);
 	color: var(--theme-secondary-text);
 	line-height: 1.6;
 }
@@ -33,7 +33,7 @@
 .form {
 	display: flex;
 	flex-direction: column;
-	gap: 24px;
+	gap: var(--space-6);
 	flex: 1;
 }
 
@@ -46,7 +46,7 @@
 .inputGroup {
 	display: flex;
 	flex-direction: column;
-	gap: 8px;
+	gap: var(--space-2);
 }
 
 .label {
@@ -57,12 +57,12 @@
 
 .input,
 .textarea {
-	padding: 16px 20px;
+	padding: var(--space-4) 20px;
 	background: rgba(var(--theme-border-rgb), 0.05);
 	border: 2px solid var(--theme-border);
-	border-radius: 12px;
+	border-radius: var(--radius-md);
 	color: var(--theme-primary-text);
-	font-size: 1rem;
+	font-size: var(--text-base);
 	transition: all 0.3s ease;
 	resize: none;
 }
@@ -87,7 +87,7 @@
 }
 
 .buttonIcon {
-	font-size: 1rem;
+	font-size: var(--text-base);
 }
 
 .honeypot {
@@ -110,7 +110,7 @@
 	height: 16px;
 	border: 2px solid rgba(255, 255, 255, 0.3);
 	border-top: 2px solid rgba(255, 255, 255, 1);
-	border-radius: 50%;
+	border-radius: var(--radius-full);
 	animation: spin 1s linear infinite;
 	display: inline-block;
 }
@@ -131,7 +131,7 @@
 
 	.formRow {
 		grid-template-columns: 1fr;
-		gap: 16px;
+		gap: var(--space-4);
 	}
 
 	.formTitle {
@@ -141,7 +141,7 @@
 
 @media (max-width: 480px) {
 	.contactForm {
-		padding: 24px;
+		padding: var(--space-6);
 	}
 
 	.formTitle {
@@ -150,6 +150,6 @@
 
 	.input,
 	.textarea {
-		padding: 14px 16px;
+		padding: 14px var(--space-4);
 	}
 }

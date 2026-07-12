@@ -1,22 +1,22 @@
 .availability {
 	display: flex;
 	flex-direction: column;
-	gap: 40px;
+	gap: var(--space-10);
 }
 
 .availabilityCard {
 	background: rgba(var(--theme-card-background-rgb), 0.95);
 	backdrop-filter: blur(12px);
-	border-radius: 24px;
+	border-radius: var(--radius-2xl);
 	border: 1px solid var(--theme-border);
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-	padding: 32px;
+	box-shadow: var(--shadow-lg);
+	padding: var(--space-8);
 	transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .availabilityCard:hover {
 	transform: translateY(-4px);
-	box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+	box-shadow: var(--shadow-lg);
 	border-color: var(--theme-primary);
 }
 
@@ -24,21 +24,21 @@
 	font-size: 1.8rem;
 	font-weight: 600;
 	color: var(--theme-primary-text);
-	margin: 0 0 12px 0;
+	margin: 0 0 var(--space-3) 0;
 	text-align: center;
 }
 
 .availabilityDescription {
-	font-size: 1rem;
+	font-size: var(--text-base);
 	color: var(--theme-secondary-text);
 	text-align: center;
-	margin: 0 0 32px 0;
+	margin: 0 0 var(--space-8) 0;
 	line-height: 1.6;
 }
 
 .availabilityList {
 	display: flex;
-	gap: 16px;
+	gap: var(--space-4);
 	justify-content: center;
 	flex-wrap: wrap;
 }
@@ -46,13 +46,13 @@
 .availabilityItem {
 	display: flex;
 	align-items: center;
-	gap: 12px;
-	padding: 16px 24px;
-	border-radius: 12px;
+	gap: var(--space-3);
+	padding: var(--space-4) var(--space-6);
+	border-radius: var(--radius-md);
 	border: 2px solid transparent;
 	background: rgba(var(--theme-border-rgb), 0.05);
 	transition: all 0.3s ease;
-	font-size: 1rem;
+	font-size: var(--text-base);
 	font-weight: 600;
 	min-width: 140px;
 	justify-content: center;
@@ -60,13 +60,13 @@
 
 .availabilityItem.available {
 	background: rgba(34, 197, 94, 0.1);
-	border-color: #22c55e;
-	color: #22c55e;
+	border-color: var(--theme-success);
+	color: var(--theme-success);
 	box-shadow: 0 0 20px rgba(34, 197, 94, 0.3);
 }
 
 .availabilityItem.available .itemIndicator {
-	background: #22c55e;
+	background: var(--theme-success);
 	box-shadow: 0 0 10px rgba(34, 197, 94, 0.5);
 	animation: pulse 2s infinite;
 }
@@ -79,14 +79,14 @@
 }
 
 .availabilityItem.unavailable .itemIndicator {
-	background: #ef4444;
+	background: var(--theme-error);
 	box-shadow: 0 0 10px rgba(239, 68, 68, 0.3);
 }
 
 .itemIndicator {
 	width: 12px;
 	height: 12px;
-	border-radius: 50%;
+	border-radius: var(--radius-full);
 	background: rgba(var(--theme-border-rgb), 0.4);
 	transition: all 0.3s ease;
 }
@@ -109,11 +109,11 @@
 
 @media (max-width: 768px) {
 	.availability {
-		gap: 32px;
+		gap: var(--space-8);
 	}
 
 	.availabilityCard {
-		padding: 24px;
+		padding: var(--space-6);
 	}
 
 	.availabilityTitle {
@@ -121,7 +121,7 @@
 	}
 
 	.availabilityList {
-		gap: 12px;
+		gap: var(--space-3);
 	}
 
 	.availabilityItem {
@@ -133,7 +133,7 @@
 
 @media (max-width: 480px) {
 	.availability {
-		gap: 24px;
+		gap: var(--space-6);
 	}
 
 	.availabilityCard {

@@ -1,5 +1,20 @@
 import { describe, expect, it } from 'vitest';
-import { formatClock } from './clock';
+import { formatClock, normalizeOffset } from './clock';
+
+describe('normalizeOffset', () => {
+	it.each([
+		['GMT', 'UTC'],
+		['GMT+0', 'UTC'],
+		['UTC+0', 'UTC'],
+		['GMT-0', 'UTC'],
+		['GMT+00:00', 'UTC'],
+		['GMT+4', 'UTC+4'],
+		['GMT-3:30', 'UTC-3:30'],
+		[undefined, 'UTC'],
+	])('turns %s into %s on every platform', (input, expected) => {
+		expect(normalizeOffset(input)).toBe(expected);
+	});
+});
 
 const moment = new Date('2026-11-04T10:05:00Z');
 

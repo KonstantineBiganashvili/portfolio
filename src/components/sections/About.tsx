@@ -27,7 +27,9 @@ export function About({ profile, experience, now = new Date() }: AboutProps) {
 				</div>
 				{profile.photoUrl ? (
 					<figure className={styles.portrait}>
-						<Image src={profile.photoUrl} alt={`Portrait of ${profile.fullName}`} width={320} height={320} sizes='(max-width: 720px) 40vw, 200px' />
+						{/* unoptimized: the browser loads it straight from the CMS. Next's optimiser would fetch it from
+						    the server, and the CDN challenges server-to-server traffic. */}
+						<Image src={profile.photoUrl} alt={`Portrait of ${profile.fullName}`} width={320} height={320} unoptimized />
 					</figure>
 				) : null}
 			</div>

@@ -63,7 +63,8 @@ describe('empty states', () => {
 		expect(screen.queryByRole('table')).toBeInTheDocument();
 		rerender(<About profile={{ ...content.profile, stats: [], photoUrl: 'https://cms.test/assets/p' }} experience={[]} />);
 		expect(screen.queryByRole('table')).not.toBeInTheDocument();
-		expect(screen.getByRole('img', { name: /Portrait of/ })).toBeInTheDocument();
+		// Loaded by the browser straight from the CMS: the server-side optimiser would be challenged by the CDN.
+		expect(screen.getByRole('img', { name: /Portrait of/ })).toHaveAttribute('src', 'https://cms.test/assets/p');
 	});
 
 	it('Experience shows roles without summary, highlights or stack', () => {

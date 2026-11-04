@@ -32,6 +32,20 @@ describe('content module wiring', () => {
 		expect((init.headers as Record<string, string>).Authorization).toBe('Bearer read-token');
 	});
 
+	it('talks to the CMS internally but builds browser-facing asset URLs from CMS_PUBLIC_URL', async () => {
+		const fetchMock = vi.fn().mockResolvedValue(new Response('ok'));
+		vi.stubGlobal('fetch', fetchMock);
+		const mod = await load({
+			CMS_FIXTURES: '0',
+			CMS_URL: 'http://directus.directus.svc.cluster.local:8055',
+			CMS_PUBLIC_URL: 'https://cms.example.com/',
+			CMS_API_KEY: 'read-token',
+		});
+		expect(mod.assetUrl('photo')).toBe('https://cms.example.com/assets/photo');
+		await mod.fetchCmsAsset('cv');
+		expect(fetchMock.mock.calls[0]![0]).toBe('http://directus.directus.svc.cluster.local:8055/assets/cv');
+	});
+
 	it('fails with a clear message when the CMS is not configured', async () => {
 		const mod = await load({ CMS_FIXTURES: '0', CMS_URL: '', CMS_API_KEY: '' });
 		await expect(mod.getContent()).rejects.toThrow(/CMS_URL/);

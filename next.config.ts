@@ -1,22 +1,11 @@
 import type { NextConfig } from 'next';
 
-// Read at BUILD time: the Docker build has no CMS_URL, so this defaults to the production CMS host.
-// If the CMS ever moves, set CMS_URL as a build arg too, or the portrait (next/image) will be rejected.
-const cmsHost = (() => {
-	try {
-		return new URL(process.env.CMS_URL ?? 'https://cms.biganashvili.dev').hostname;
-	} catch {
-		return 'cms.biganashvili.dev';
-	}
-})();
-
 const nextConfig: NextConfig = {
 	output: 'standalone',
 	poweredByHeader: false,
-	images: {
-		formats: ['image/avif', 'image/webp'],
-		remotePatterns: [{ protocol: 'https', hostname: cmsHost, pathname: '/assets/**' }],
-	},
+	// The only remote image (the portrait) is rendered `unoptimized`, so no remotePatterns are needed:
+	// the browser loads it from the CMS directly instead of the server fetching it through the CDN.
+	images: { formats: ['image/avif', 'image/webp'] },
 	compiler: {
 		removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
 	},

@@ -18,6 +18,13 @@ export default defineConfig({
 		url: `http://localhost:${PORT}`,
 		reuseExistingServer: !process.env.CI,
 		timeout: 120_000,
-		env: { CMS_FIXTURES: '1', BUILD_SHA: 'e2e0000' },
+		// Everything the app reads is pinned here so runs don't depend on a developer's .env.
+		// The form key is a dummy: tests intercept or never reach the Web3Forms endpoint.
+		env: {
+			CMS_FIXTURES: '1',
+			BUILD_SHA: 'e2e0000',
+			WEB3_FORM_API_URL: 'https://api.web3forms.com/submit',
+			WEB3_FORM_API_KEY: 'e2e-dummy-key',
+		},
 	},
 });

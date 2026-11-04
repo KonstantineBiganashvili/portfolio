@@ -1,67 +1,40 @@
 import type { NextConfig } from 'next';
 
+// Read at BUILD time: the Docker build has no CMS_URL, so this defaults to the production CMS host.
+// If the CMS ever moves, set CMS_URL as a build arg too, or the portrait (next/image) will be rejected.
+const cmsHost = (() => {
+	try {
+		return new URL(process.env.CMS_URL ?? 'https://cms.biganashvili.dev').hostname;
+	} catch {
+		return 'cms.biganashvili.dev';
+	}
+})();
+
 const nextConfig: NextConfig = {
 	output: 'standalone',
-	experimental: {
-		optimizePackageImports: ['lucide-react'],
-	},
+	poweredByHeader: false,
 	images: {
-		formats: ['image/webp', 'image/avif'],
-		deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-		imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-		dangerouslyAllowSVG: true,
-		contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-		remotePatterns: [
-			{
-				protocol: 'https',
-				hostname: 'cms.biganashvili.dev',
-				pathname: '/assets/**',
-			},
-			{
-				protocol: 'http',
-				hostname: 'localhost',
-				pathname: '/assets/**',
-			},
-		],
+		formats: ['image/avif', 'image/webp'],
+		remotePatterns: [{ protocol: 'https', hostname: cmsHost, pathname: '/assets/**' }],
 	},
 	compiler: {
-		removeConsole: process.env.NODE_ENV === 'production',
+		removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
 	},
-	compress: true,
-	poweredByHeader: false,
-	trailingSlash: false,
-	generateEtags: true,
 	async headers() {
 		return [
 			{
 				source: '/(.*)',
 				headers: [
-					{
-						key: 'X-Frame-Options',
-						value: 'DENY',
-					},
-					{
-						key: 'X-Content-Type-Options',
-						value: 'nosniff',
-					},
-					{
-						key: 'Referrer-Policy',
-						value: 'origin-when-cross-origin',
-					},
-					{
-						key: 'Permissions-Policy',
-						value: 'camera=(), microphone=(), geolocation=()',
-					},
+					{ key: 'X-Frame-Options', value: 'DENY' },
+					{ key: 'X-Content-Type-Options', value: 'nosniff' },
+					{ key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+					{ key: 'Permissions-Policy', value: 'camera=(), microphone=(), geolocation=()' },
 				],
 			},
 			{
 				source: '/static/(.*)',
-				headers: [
-					{
-						key: 'Cache-Control',
-						value: 'public, max-age=31536000, immutable',
-					},
-				],
+				// Not content-hashed, so no `immutable`: a replaced image must reach returning visitors.
+				headers: [{ key: 'Cache-Control', value: 'public, max-age=86400' }],
 			},
 		];
 	},

@@ -1,3 +1,11 @@
+# Tests and design references (not needed to build the image)
+e2e
+playwright.config.ts
+playwright-report
+test-results
+design_handoff_design_system
+*.test.tsx
+
 # Dependencies
 node_modules
 npm-debug.log*

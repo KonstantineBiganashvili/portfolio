@@ -1,20 +1,67 @@
-name: Build, push to GHCR, and update GitOps manifests
+name: Test, build, push to GHCR, and update GitOps manifests
 
 on:
   push:
     branches: ['main']
+  pull_request:
+    branches: ['main']
 
 permissions:
   contents: read
-  packages: write
 
 concurrency:
-  group: portfolio-deploy
+  group: portfolio-${{ github.event_name }}-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  build-push-deploy:
+  test:
     runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Type-check
+        run: npm run typecheck
+
+      - name: Unit tests (80% coverage gate)
+        run: npm run coverage
+
+      - name: Build
+        run: npm run build
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: End-to-end tests (fixture content, no CMS needed)
+        run: npm run e2e
+
+      - name: Upload Playwright report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+          retention-days: 7
+
+  build-push-deploy:
+    needs: test
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    concurrency:
+      group: portfolio-deploy
+      cancel-in-progress: true
     steps:
       - name: Checkout portfolio
         uses: actions/checkout@v4
@@ -40,6 +87,8 @@ jobs:
         with:
           context: .
           push: true
+          build-args: |
+            BUILD_SHA=${{ github.sha }}
           tags: |
             ${{ steps.img.outputs.image }}:${{ steps.img.outputs.tag }}
             ${{ steps.img.outputs.image }}:latest

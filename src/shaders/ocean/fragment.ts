@@ -53,9 +53,11 @@ void main() {
     waterColor = mix(waterColor, uRimColor, rimT * 0.3);
 
     vec3 finalCol = mix(waterColor, vec3(1.0), combined);
-    float alpha   = mix(0.2, 1.0, foam.r);
+    // Mostly opaque with its own glow: the core sits on a dark page, not in front of a sky.
+    float alpha   = mix(0.86, 1.0, foam.r);
 
     csm_FragColor = vec4(finalCol, alpha);
+    csm_Emissive  = waterColor * 0.42 + combined * 0.12;
 }
 `;
 

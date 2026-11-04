@@ -23,6 +23,10 @@ const eslintConfig = [
 			'out/**',
 			'build/**',
 			'next-env.d.ts',
+			'coverage/**',
+			'playwright-report/**',
+			'test-results/**',
+			'design_handoff_design_system/**',
 		],
 	},
 ];

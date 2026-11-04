@@ -1,0 +1,404 @@
+.section {
+	padding-top: var(--space-9);
+}
+
+.promptChar {
+	color: var(--beacon);
+}
+
+.subcommand {
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	color: var(--silt);
+	margin-bottom: var(--space-3);
+}
+
+/* ---------- about ---------- */
+.aboutGrid {
+	display: grid;
+	gap: var(--space-6);
+	align-items: start;
+}
+
+@media (min-width: 820px) {
+	.aboutGrid {
+		grid-template-columns: minmax(0, var(--measure)) 200px;
+		justify-content: space-between;
+	}
+}
+
+.prose {
+	max-width: var(--measure);
+	font-size: var(--step-1);
+	line-height: 1.7;
+	color: var(--foam);
+}
+
+.prose p + p {
+	margin-top: var(--space-4);
+}
+
+.portrait {
+	width: min(40vw, 200px);
+	border: 1px solid var(--grid-strong);
+	border-radius: var(--radius);
+	overflow: hidden;
+	background: var(--trench);
+}
+
+.portrait img {
+	width: 100%;
+	height: auto;
+	filter: grayscale(1) contrast(1.05) brightness(0.95);
+	mix-blend-mode: luminosity;
+}
+
+.output {
+	margin-top: var(--space-7);
+	max-width: 52rem;
+}
+
+.metrics {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+}
+
+.metrics th,
+.metrics td {
+	padding: var(--space-2) var(--space-4) var(--space-2) 0;
+	text-align: left;
+	vertical-align: baseline;
+	border-bottom: 1px solid var(--grid);
+}
+
+.metrics thead th {
+	color: var(--silt);
+	font-weight: 400;
+	font-size: 0.6875rem;
+	letter-spacing: 0.04em;
+}
+
+.metrics tbody th {
+	font-weight: 400;
+	color: var(--tide);
+}
+
+.metricValue {
+	color: var(--sonar);
+	font-weight: 600;
+	white-space: nowrap;
+}
+
+.metrics td:last-child {
+	color: var(--silt);
+}
+
+@media (max-width: 599px) {
+	.hideNarrow {
+		display: none;
+	}
+}
+
+/* ---------- experience ---------- */
+.table {
+	border-top: 1px solid var(--grid);
+}
+
+.row {
+	display: grid;
+	grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.6fr) minmax(0, 1.3fr) 4.5rem 7.5rem;
+	gap: var(--space-4);
+	align-items: center;
+	padding: var(--space-3) 0;
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+}
+
+.headRow {
+	color: var(--silt);
+	font-size: 0.6875rem;
+	letter-spacing: 0.04em;
+	border-bottom: 1px solid var(--grid);
+}
+
+.entry {
+	border-bottom: 1px solid var(--grid);
+}
+
+.entry > summary {
+	list-style: none;
+	cursor: pointer;
+}
+
+.entry > summary::-webkit-details-marker {
+	display: none;
+}
+
+.entry > summary:hover .company {
+	color: var(--sonar);
+}
+
+.company {
+	color: var(--foam);
+	font-weight: 600;
+}
+
+.company::before {
+	content: '▸';
+	display: inline-block;
+	width: 1.2em;
+	color: var(--silt);
+	transition: transform 0.15s ease;
+}
+
+.entry[open] .company::before {
+	transform: rotate(90deg);
+	color: var(--beacon);
+}
+
+.role {
+	color: var(--tide);
+}
+
+.period,
+.age {
+	color: var(--silt);
+}
+
+.entryBody {
+	display: grid;
+	gap: var(--space-4);
+	padding: 0 0 var(--space-5) 1.2em;
+	max-width: calc(var(--measure) + 1.2em);
+	font-family: var(--font-sans);
+}
+
+.entrySummary {
+	color: var(--foam);
+}
+
+.highlights {
+	display: grid;
+	gap: var(--space-2);
+	list-style: none;
+	color: var(--tide);
+}
+
+.highlights li {
+	position: relative;
+	padding-left: var(--space-5);
+}
+
+.highlights li::before {
+	content: '-';
+	position: absolute;
+	left: var(--space-1);
+	color: var(--sonar);
+	font-family: var(--font-mono);
+}
+
+@media (max-width: 759px) {
+	.headRow {
+		display: none;
+	}
+	.row {
+		grid-template-columns: minmax(0, 1fr) auto;
+		grid-template-areas:
+			'company status'
+			'role role'
+			'period age';
+		gap: var(--space-1) var(--space-3);
+	}
+	.company {
+		grid-area: company;
+	}
+	.status {
+		grid-area: status;
+	}
+	.role {
+		grid-area: role;
+		padding-left: 1.2em;
+	}
+	.period {
+		grid-area: period;
+		padding-left: 1.2em;
+	}
+	.age {
+		grid-area: age;
+		text-align: right;
+	}
+}
+
+/* ---------- projects ---------- */
+.projects {
+	list-style: none;
+	border-top: 1px solid var(--grid);
+}
+
+.project {
+	display: grid;
+	gap: var(--space-4) var(--space-7);
+	padding: var(--space-6) 0;
+	border-bottom: 1px solid var(--grid);
+}
+
+@media (min-width: 820px) {
+	.project {
+		grid-template-columns: 15rem minmax(0, 1fr);
+	}
+}
+
+.projectMeta {
+	display: grid;
+	gap: var(--space-3);
+	align-content: start;
+	justify-items: start;
+}
+
+.projectName {
+	font-family: var(--font-mono);
+	font-size: var(--step-3);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.2;
+}
+
+.projectName a {
+	color: var(--foam);
+	text-decoration: none;
+}
+
+/* The whole row is the click target; the heading link stays the accessible one. */
+.projectName a::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+}
+
+.project {
+	position: relative;
+}
+
+.project:hover .projectName a,
+.projectName a:focus-visible {
+	color: var(--sonar);
+}
+
+.project:has(.projectName a:focus-visible) {
+	outline: 2px solid var(--beacon);
+	outline-offset: 4px;
+}
+
+.projectName a:focus-visible {
+	outline: none;
+}
+
+.projectContext {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--silt);
+}
+
+.projectBody {
+	display: grid;
+	gap: var(--space-4);
+	max-width: var(--measure);
+}
+
+.projectTagline {
+	font-size: var(--step-2);
+	line-height: 1.4;
+	color: var(--foam);
+}
+
+.projectSummary {
+	color: var(--tide);
+}
+
+.readMore {
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--silt);
+}
+
+.project:hover .readMore {
+	color: var(--tide);
+}
+
+/* ---------- skills ---------- */
+.values {
+	display: grid;
+	gap: var(--space-3);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	line-height: 1.8;
+}
+
+.valueRow {
+	display: grid;
+	gap: 0 var(--space-4);
+}
+
+@media (min-width: 760px) {
+	.valueRow {
+		grid-template-columns: 13rem minmax(0, 1fr);
+	}
+}
+
+.valueRow dt {
+	color: var(--sonar);
+}
+
+.valueRow dd {
+	color: var(--foam);
+}
+
+.bracket {
+	color: var(--silt);
+}
+
+.valueItem {
+	white-space: nowrap;
+}
+
+/* ---------- education ---------- */
+.log {
+	list-style: none;
+	display: grid;
+	gap: var(--space-4);
+}
+
+.log li {
+	display: grid;
+	gap: var(--space-1) var(--space-5);
+}
+
+@media (min-width: 760px) {
+	.log li {
+		grid-template-columns: 13rem minmax(0, 1fr);
+	}
+}
+
+.logTime {
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	color: var(--silt);
+	white-space: nowrap;
+}
+
+.logText {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--space-3);
+	align-items: baseline;
+}
+
+.logText strong {
+	font-weight: 600;
+}
+
+.logSource {
+	color: var(--tide);
+}

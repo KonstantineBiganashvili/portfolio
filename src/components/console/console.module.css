@@ -1,0 +1,85 @@
+/* Section heading: the command that produced the output below it. */
+.command {
+	font-family: var(--font-mono);
+	font-size: var(--step-1);
+	font-weight: 500;
+	line-height: 1.4;
+	letter-spacing: -0.01em;
+	margin-bottom: var(--space-6);
+	overflow-wrap: anywhere;
+}
+
+.commandLarge {
+	font-size: clamp(var(--step-2), 3.4vw, var(--step-4));
+	font-weight: 600;
+	margin-bottom: var(--space-5);
+}
+
+.prompt {
+	color: var(--beacon);
+}
+
+.verb {
+	color: var(--silt);
+}
+
+.resource {
+	color: var(--foam);
+}
+
+.flags {
+	color: var(--silt);
+	font-weight: 400;
+}
+
+/* Status pill */
+.pill {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+	padding: 2px var(--space-3) 2px var(--space-2);
+	border: 1px solid var(--grid-strong);
+	border-radius: 999px;
+	background: rgb(7 11 20 / 0.6);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	line-height: 1.6;
+	color: var(--tide);
+	white-space: nowrap;
+}
+
+.dot {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--silt);
+	flex: none;
+}
+
+.pill[data-tone='ok'] .dot {
+	background: var(--ok);
+	box-shadow: 0 0 0 3px rgb(74 222 128 / 0.18);
+}
+
+.pill[data-tone='warn'] .dot {
+	background: var(--beacon);
+	box-shadow: 0 0 0 3px var(--beacon-soft);
+}
+
+/* Tags */
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2);
+	list-style: none;
+}
+
+.tag {
+	padding: 1px var(--space-2);
+	border: 1px solid var(--grid);
+	border-radius: var(--radius);
+	color: var(--tide);
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	line-height: 1.7;
+}

@@ -1,0 +1,74 @@
+.mount {
+	position: absolute;
+	inset: 0;
+	z-index: -2;
+	pointer-events: none;
+}
+
+.canvas {
+	position: absolute !important;
+	inset: 0;
+	opacity: 0;
+	transition: opacity 1.4s ease;
+}
+
+.canvas[data-ready='true'] {
+	opacity: 1;
+}
+
+/* Static stand-in: shown for reduced motion / no WebGL, and while the 3D bundle loads. */
+.poster {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	perspective: 900px;
+	transition: opacity 1.2s ease 0.4s;
+}
+
+.mount[data-mode='live'] .poster {
+	opacity: 0;
+}
+
+.poster > * {
+	grid-area: 1 / 1;
+}
+
+.posterCore {
+	width: 26vmin;
+	aspect-ratio: 1;
+	border-radius: 50%;
+	background: radial-gradient(circle at 34% 30%, #a5f3fc 0%, #2dd4bf 16%, #0b4f5e 52%, #062029 78%);
+	box-shadow:
+		0 0 0 1.4vmin rgb(45 212 191 / 0.06),
+		0 0 90px rgb(45 212 191 / 0.22);
+}
+
+.posterRing {
+	width: 62vmin;
+	aspect-ratio: 1;
+	border: 1px solid var(--grid-strong);
+	border-radius: 50%;
+	transform: rotateX(72deg) rotateZ(14deg);
+}
+
+.posterRing2 {
+	width: 80vmin;
+	transform: rotateX(68deg) rotateZ(-22deg);
+}
+
+@media (min-aspect-ratio: 11/10) {
+	.poster {
+		padding-left: 38vw;
+	}
+}
+
+@media (max-aspect-ratio: 11/10) {
+	.poster {
+		align-items: start;
+		padding-top: 10vh;
+	}
+	.posterCore {
+		width: 34vmin;
+	}
+}

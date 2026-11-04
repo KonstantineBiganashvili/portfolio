@@ -1,0 +1,219 @@
+.hero {
+	position: relative;
+	isolation: isolate;
+	min-height: calc(100svh - var(--header-h));
+	display: flex;
+	overflow: hidden;
+	border-bottom: 1px solid var(--grid);
+}
+
+/* Fades the scene into the page below and keeps the text side legible. */
+.hero::after {
+	content: '';
+	position: absolute;
+	inset: 0;
+	z-index: -1;
+	pointer-events: none;
+	background:
+		linear-gradient(90deg, rgb(7 11 20 / 0.92) 0%, rgb(7 11 20 / 0.55) 45%, rgb(7 11 20 / 0) 70%),
+		linear-gradient(0deg, var(--abyss) 0%, rgb(7 11 20 / 0) 22%);
+}
+
+.frame {
+	position: relative;
+	display: grid;
+	grid-template-rows: auto 1fr auto;
+	gap: var(--space-6);
+	padding-block: var(--space-5);
+}
+
+.hudTop,
+.hudBottom {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--space-4);
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--tide);
+}
+
+.key {
+	color: var(--silt);
+	margin-right: var(--space-2);
+}
+
+.context {
+	white-space: nowrap;
+}
+
+.copy {
+	align-self: center;
+	max-width: min(48rem, 100%);
+}
+
+.whoami {
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	color: var(--tide);
+	margin-bottom: var(--space-4);
+}
+
+.prompt {
+	color: var(--beacon);
+}
+
+/* The one loud element on the page. */
+.name {
+	font-family: var(--font-mono);
+	font-weight: 700;
+	font-size: clamp(2.35rem, 7.2vw, 5.25rem);
+	line-height: 0.98;
+	letter-spacing: -0.045em;
+	color: var(--foam);
+	margin-bottom: var(--space-5);
+}
+
+.name span {
+	display: block;
+	white-space: nowrap;
+}
+
+.name span:last-child::after {
+	content: '';
+	display: inline-block;
+	width: 0.5em;
+	height: 0.82em;
+	margin-left: 0.08em;
+	vertical-align: -0.04em;
+	background: var(--beacon);
+	animation: blink 1.1s steps(1) 6;
+	animation-fill-mode: forwards;
+}
+
+@keyframes blink {
+	50% {
+		opacity: 0;
+	}
+}
+
+.headline {
+	font-family: var(--font-mono);
+	font-size: var(--step-1);
+	font-weight: 500;
+	color: var(--sonar);
+	margin-bottom: var(--space-3);
+}
+
+.tagline {
+	font-size: var(--step-2);
+	line-height: 1.45;
+	color: var(--foam);
+	max-width: 30ch;
+	margin-bottom: var(--space-5);
+}
+
+.roles {
+	list-style: none;
+	display: grid;
+	gap: var(--space-1);
+	margin-bottom: var(--space-6);
+	font-size: var(--step--1);
+	color: var(--tide);
+}
+
+.roles li {
+	display: flex;
+	align-items: center;
+	gap: var(--space-3);
+}
+
+.running {
+	width: 7px;
+	height: 7px;
+	border-radius: 50%;
+	background: var(--ok);
+	box-shadow: 0 0 0 3px rgb(74 222 128 / 0.16);
+	flex: none;
+}
+
+.actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+	display: inline-flex;
+	align-items: center;
+	min-height: 44px;
+	padding: 0 var(--space-5);
+	border-radius: var(--radius);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.primary {
+	background: var(--beacon);
+	color: var(--abyss);
+}
+
+.primary:hover {
+	background: var(--foam);
+	color: var(--abyss);
+}
+
+.secondary {
+	border: 1px solid var(--grid-strong);
+	color: var(--foam);
+	background: rgb(7 11 20 / 0.5);
+}
+
+.secondary:hover {
+	border-color: var(--sonar);
+	color: var(--sonar);
+}
+
+.clock {
+	white-space: nowrap;
+}
+
+.offset {
+	color: var(--silt);
+}
+
+.scroll {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-3);
+	color: var(--tide);
+	text-decoration: none;
+}
+
+.scrollLine {
+	width: 32px;
+	height: 1px;
+	background: linear-gradient(90deg, var(--sonar), transparent);
+}
+
+@media (max-width: 719px) {
+	.hero::after {
+		background:
+			linear-gradient(180deg, rgb(7 11 20 / 0.2) 0%, rgb(7 11 20 / 0.82) 55%, var(--abyss) 100%);
+	}
+	.context {
+		display: none;
+	}
+	.hudTop {
+		justify-content: flex-end;
+	}
+	.copy {
+		align-self: end;
+	}
+	.scroll {
+		display: none;
+	}
+}

@@ -1,0 +1,315 @@
+/* ---------- topology diagram ---------- */
+.topology {
+	display: grid;
+	gap: var(--space-3);
+}
+
+.topologyScroll {
+	overflow-x: auto;
+	padding: var(--space-5) var(--space-4);
+	border: 1px solid var(--grid);
+	border-radius: var(--radius);
+	background:
+		radial-gradient(circle, var(--grid) 1px, transparent 1.2px) 0 0 / 20px 20px,
+		var(--trench);
+}
+
+.topologySvg {
+	margin-inline: auto;
+	max-width: none;
+	height: auto;
+}
+
+@media (min-width: 900px) {
+	.topologySvg {
+		max-width: 100%;
+	}
+}
+
+.edge {
+	fill: none;
+	stroke: var(--grid-strong);
+	stroke-width: 1.4;
+}
+
+.edgeBack {
+	stroke-dasharray: 4 4;
+	stroke: var(--sonar);
+	opacity: 0.55;
+}
+
+.arrow {
+	fill: var(--grid-strong);
+}
+
+.edgeLabel {
+	font-family: var(--font-mono);
+	font-size: 10.5px;
+	fill: var(--tide);
+	paint-order: stroke;
+	stroke: var(--trench);
+	stroke-width: 5px;
+	stroke-linejoin: round;
+}
+
+.node rect {
+	fill: var(--abyss);
+	stroke: var(--grid-strong);
+	stroke-width: 1;
+}
+
+.node[data-kind='client'] rect {
+	stroke: var(--beacon);
+}
+
+.node[data-kind='service'] rect {
+	stroke: var(--sonar);
+}
+
+.node[data-kind='data'] rect {
+	stroke: #7dd3fc;
+	stroke-dasharray: 0;
+}
+
+.node[data-kind='external'] rect {
+	stroke: var(--silt);
+	stroke-dasharray: 4 3;
+}
+
+.node[data-kind='infra'] rect {
+	stroke: #c4b5fd;
+}
+
+.nodeKind {
+	font-family: var(--font-mono);
+	font-size: 9.5px;
+	fill: var(--silt);
+}
+
+.nodeLabel {
+	font-family: var(--font-sans);
+	font-size: 13px;
+	font-weight: 500;
+	fill: var(--foam);
+}
+
+.legend {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2) var(--space-5);
+	font-family: var(--font-mono);
+	font-size: 0.75rem;
+	color: var(--tide);
+}
+
+.legendItem {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.swatch {
+	width: 12px;
+	height: 8px;
+	border: 1px solid var(--grid-strong);
+	border-radius: 1px;
+}
+
+.legendItem[data-kind='client'] .swatch {
+	border-color: var(--beacon);
+}
+.legendItem[data-kind='service'] .swatch {
+	border-color: var(--sonar);
+}
+.legendItem[data-kind='data'] .swatch {
+	border-color: #7dd3fc;
+}
+.legendItem[data-kind='external'] .swatch {
+	border-color: var(--silt);
+	border-style: dashed;
+}
+.legendItem[data-kind='infra'] .swatch {
+	border-color: #c4b5fd;
+}
+
+/* ---------- case study page ---------- */
+.page {
+	padding-top: var(--space-7);
+}
+
+.back {
+	display: inline-block;
+	margin-bottom: var(--space-6);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+	color: var(--tide);
+	text-decoration: none;
+}
+
+.back:hover {
+	color: var(--sonar);
+}
+
+.describe {
+	display: grid;
+	grid-template-columns: max-content minmax(0, 1fr);
+	gap: var(--space-1) var(--space-5);
+	margin-bottom: var(--space-6);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+}
+
+.describe dt {
+	color: var(--silt);
+}
+
+.describe dd {
+	color: var(--foam);
+}
+
+.lead {
+	max-width: var(--measure);
+	font-size: var(--step-2);
+	line-height: 1.5;
+	margin-bottom: var(--space-4);
+}
+
+.summary {
+	max-width: var(--measure);
+	color: var(--tide);
+	font-size: var(--step-1);
+}
+
+.block {
+	margin-top: var(--space-8);
+}
+
+.blockTitle {
+	font-family: var(--font-mono);
+	font-size: var(--step-1);
+	font-weight: 500;
+	margin-bottom: var(--space-5);
+}
+
+.blockTitle span {
+	color: var(--silt);
+}
+
+.highlightList {
+	display: grid;
+	gap: var(--space-5) var(--space-7);
+	list-style: none;
+}
+
+@media (min-width: 760px) {
+	.highlightList {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+
+.highlightList dt {
+	font-weight: 600;
+	margin-bottom: var(--space-1);
+}
+
+.highlightList dd {
+	color: var(--tide);
+}
+
+.article {
+	max-width: var(--measure);
+	font-size: var(--step-1);
+	line-height: 1.75;
+}
+
+.article h2 {
+	font-family: var(--font-mono);
+	font-size: var(--step-1);
+	font-weight: 600;
+	color: var(--sonar);
+	margin: var(--space-7) 0 var(--space-3);
+}
+
+.article h2:first-child {
+	margin-top: 0;
+}
+
+.article p + p,
+.article p + ul,
+.article ul + p,
+.article p + ol,
+.article ol + p {
+	margin-top: var(--space-4);
+}
+
+.article ul,
+.article ol {
+	display: grid;
+	gap: var(--space-3);
+	padding-left: var(--space-5);
+}
+
+.article li::marker {
+	color: var(--sonar);
+	font-family: var(--font-mono);
+}
+
+.article strong {
+	color: var(--foam);
+	font-weight: 600;
+}
+
+.article code {
+	padding: 1px 5px;
+	border: 1px solid var(--grid);
+	border-radius: var(--radius);
+	background: var(--trench);
+	color: var(--beacon);
+}
+
+.stack {
+	display: grid;
+	gap: var(--space-3);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+}
+
+.stack div {
+	display: grid;
+	gap: 0 var(--space-4);
+}
+
+@media (min-width: 760px) {
+	.stack div {
+		grid-template-columns: 13rem minmax(0, 1fr);
+	}
+}
+
+.stack dt {
+	color: var(--sonar);
+}
+
+.stack dd {
+	color: var(--foam);
+}
+
+.next {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	gap: var(--space-4);
+	margin-top: var(--space-8);
+	padding-top: var(--space-5);
+	border-top: 1px solid var(--grid);
+	font-family: var(--font-mono);
+	font-size: var(--step--1);
+}
+
+.next a {
+	color: var(--tide);
+	text-decoration: none;
+}
+
+.next a:hover {
+	color: var(--sonar);
+}
